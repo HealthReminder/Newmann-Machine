@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 class Triangle
@@ -25,7 +26,7 @@ public class Deformer : MonoBehaviour
     //Original vertices, Displaced vertices
     Vector3[] og_vert, disp_vert;
     //Original triangles, Displaced triangles
-    Triangle[] disp_tri;
+    Triangle[] triangles;
     void Start()
     {
         //Get required components
@@ -40,93 +41,144 @@ public class Deformer : MonoBehaviour
 
         //Get triangles
         int tri_index_count = mesh_deforming.triangles.Length;
-        disp_tri = new Triangle[tri_index_count/3];
+        triangles = new Triangle[tri_index_count/3];
 
         int[] mesh_tris_indexes = mesh_deforming.triangles;
         Vector3[] mesh_verts = mesh_deforming.vertices;
 
-        Debug.Log("Triangle count: " + disp_tri.Length);
+        Debug.Log("Triangle count: " + triangles.Length);
         Debug.Log("Triangle indexes count: " + mesh_tris_indexes.Length);
         Debug.Log("Vertices count: " + mesh_verts.Length);
 
-        for (int i = 0; i < disp_tri.Length; i++)
-            disp_tri[i] = new Triangle();
+        for (int i = 0; i < triangles.Length; i++)
+            triangles[i] = new Triangle();
 
+        //This list will be used to order the triangle list
+        //Cacheing it separately makes it easier to sort the distances;
+        List<Vector3> centers = new List<Vector3>();
+
+        //Get a list of triangles from the mesh
         int k = 0;
-        for (int i = 0; i < disp_tri.Length; i ++)
+        for (int i = 0; i < triangles.Length; i ++)
         {
-            disp_tri[i].p1 = mesh_verts[mesh_tris_indexes[i+k]];
-            disp_tri[i].i1 = mesh_tris_indexes[i + k];
-            disp_tri[i].p2 = mesh_verts[mesh_tris_indexes[i + 1 + k]];
-            disp_tri[i].i2 = mesh_tris_indexes[i + 1 + k];
-            disp_tri[i].p3 = mesh_verts[mesh_tris_indexes[i + 2 + k]];
-            disp_tri[i].i3 = mesh_tris_indexes[i + 2 + k];
+            triangles[i].p1 = mesh_verts[mesh_tris_indexes[i+k]];
+            triangles[i].i1 = mesh_tris_indexes[i + k];
+            triangles[i].p2 = mesh_verts[mesh_tris_indexes[i + 1 + k]];
+            triangles[i].i2 = mesh_tris_indexes[i + 1 + k];
+            triangles[i].p3 = mesh_verts[mesh_tris_indexes[i + 2 + k]];
+            triangles[i].i3 = mesh_tris_indexes[i + 2 + k];
 
             //Get center of triangle
             //Centers will be used to find neighbours
             //Neighbours will be used to put the triangles in order
-            Bounds bounds = new Bounds(disp_tri[i].p1, Vector3.zero);
-            bounds.Encapsulate(disp_tri[i].p2);
-            bounds.Encapsulate(disp_tri[i].p3);
-            disp_tri[i].center = bounds.center;
+            Bounds bounds = new Bounds(triangles[i].p1, Vector3.zero);
+            bounds.Encapsulate(triangles[i].p2);
+            bounds.Encapsulate(triangles[i].p3);
+            triangles[i].center = bounds.center;
+            centers.Add(bounds.center);
 
             k +=2;
         }
-        Deform();
-        //StartCoroutine(DeformRoutine());
-    }
-    void Deform()
-    {
-        StartCoroutine(DeformTriangles());
-
-    }
-    IEnumerator DeformRoutine()
-    {
-        while (true)
+        Debug.Log("Cached the centers of "+centers.Count+" triangles");
+        
+        //Order the list of centers we got
+        List<Vector3> ordered_centers = new List<Vector3>();
+        List<int> ordered_indexes = new List<int>();
+        for (int i = 0; i < centers.Count; i++)
         {
-            StartCoroutine(DeformTriangles());
-            yield return new WaitForSeconds(1);
+            int new_index = ordered_centers.Count;
+            for (int o = 0; o < ordered_centers.Count; o++)
+            {
+                if (centers[i].x < ordered_centers[o].x)
+                {
+                    new_index = o;
+                    break;
+                }
+                else if (centers[i].x > ordered_centers[o].x)
+                    new_index = o + 1;
+                else
+                {
+                    if (centers[i].y < ordered_centers[o].y)
+                    {
+                        new_index = o;
+                        break;
+                    }
+                    else if (centers[i].y > ordered_centers[o].y)
+                        new_index = o + 1;
+                }
+            }
+            ordered_centers.Insert(new_index, centers[i]);
+            ordered_indexes.Insert(new_index, i);
         }
-        yield return null;
+        Debug.Log("Ordered " + ordered_centers.Count + " centers");
+
+        //Order triangles according to the ordered centers
+        List<Triangle> ordered_triangles = new List<Triangle>();
+        for (int i = 0; i < ordered_centers.Count; i++)
+        {
+            ordered_triangles.Add(triangles[ordered_indexes[i]]);
+
+        }
+        Debug.Log("Ordered " + ordered_triangles.Count + " triangles");
+
+        triangles = ordered_triangles.ToArray();
+
+        StartCoroutine(DeformTriangles());
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+            MoveTriangle(triangles[0], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.W))
+            MoveTriangle(triangles[1], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.A))
+            MoveTriangle(triangles[2], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.S))
+            MoveTriangle(triangles[3], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.Z))
+            MoveTriangle(triangles[4], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.X))
+            MoveTriangle(triangles[5], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.E))
+            MoveTriangle(triangles[triangles.Length - 1], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.R))
+            MoveTriangle(triangles[Random.Range(0, triangles.Length - 1)], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.F))
+            MoveTriangle(triangles[200], Vector3.up, true);
     }
 
     public IEnumerator DeformTriangles()
     {
-        yield return new WaitForSeconds(2);
-
-
-       for (int i = 0; i < disp_tri.Length; i++)
+        yield return new WaitForSeconds(1);
+        //This line will only work on square meshes
+        float[,] height_map = HeightMap.Generate(Mathf.Sqrt(triangles.Length));
+        foreach (Triangle t in triangles)
         {
-            disp_tri[i].Translate(Vector3.up);
-        }
-        foreach (Triangle t in disp_tri)
-        {
-            disp_vert[t.i1] = t.p1;
-            disp_vert[t.i2] = t.p2;
-            disp_vert[t.i3] = t.p3;
-
+            MoveTriangle(t, Vector3.up, true);
             yield return null;
-
-            mesh_deforming.vertices = disp_vert;
-            mesh_deforming.RecalculateNormals();
         }
-        Debug.Log("Went through "+ disp_tri.Length+" triangles");
+        yield return null;
+
+        Debug.Log("Went through "+ triangles.Length+" triangles");
 
         mesh_deforming.vertices = disp_vert;
         mesh_deforming.RecalculateNormals();
         mesh_collider.sharedMesh = mesh_deforming;
         yield break;
     }
-    Vector3[] SortPoints(Vector3[] points)
+    void MoveTriangle(Triangle t, Vector3 v, bool update)
     {
-        List<Vector3> result = new List<Vector3>();
-        result.Add(points[0]);
-        for (int i = 1; i < points.Length; i++)
-        {
-            result.Add(points[i]);
-        }
-        result.Sort();
-        return result.ToArray();
+        t.Translate(v);
+        disp_vert[t.i1] = t.p1;
+        disp_vert[t.i2] = t.p2;
+        disp_vert[t.i3] = t.p3;
+
+        if (!update)
+            return;
+
+        mesh_deforming.vertices = disp_vert;
+        mesh_deforming.RecalculateNormals();
+
     }
     public void DeformVertices()
     {
