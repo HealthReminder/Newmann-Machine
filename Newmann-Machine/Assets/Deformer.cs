@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ public class Deformer : MonoBehaviour
     Vector3[] og_vert, disp_vert;
     //Original triangles, Displaced triangles
     Triangle[] triangles;
+    //Used to generate maps //read-only
+    public Vector2 mesh_size;
     void Start()
     {
         //Get required components
@@ -84,32 +87,46 @@ public class Deformer : MonoBehaviour
         //Order the list of centers we got
         List<Vector3> ordered_centers = new List<Vector3>();
         List<int> ordered_indexes = new List<int>();
+        //Every time Y changes 
+        mesh_size = Vector2.zero;
+        //This list will be counted to find out the dimensions of the mesh
+        List<float> unique_y = new List<float>();
         for (int i = 0; i < centers.Count; i++)
         {
             int new_index = ordered_centers.Count;
+            Vector3 current_center = centers[i];
             for (int o = 0; o < ordered_centers.Count; o++)
             {
-                if (centers[i].x < ordered_centers[o].x)
+                if (current_center.x < ordered_centers[o].x)
                 {
                     new_index = o;
                     break;
                 }
-                else if (centers[i].x > ordered_centers[o].x)
+                else if (current_center.x > ordered_centers[o].x)
                     new_index = o + 1;
                 else
                 {
-                    if (centers[i].y < ordered_centers[o].y)
+                    if (current_center.y < ordered_centers[o].y)
                     {
                         new_index = o;
                         break;
                     }
-                    else if (centers[i].y > ordered_centers[o].y)
+                    else if (current_center.y > ordered_centers[o].y)
                         new_index = o + 1;
                 }
             }
-            ordered_centers.Insert(new_index, centers[i]);
+            ordered_centers.Insert(new_index, current_center);
             ordered_indexes.Insert(new_index, i);
+            //Cached unique Ys
+            bool unique = true;
+            foreach (float y in unique_y)
+                if (y == current_center.y)
+                    unique = false;
+            if (unique)
+                unique_y.Add(current_center.y);
         }
+        float y_size = unique_y.Count;
+        mesh_size = new Vector2(triangles.Length / y_size, y_size);
         Debug.Log("Ordered " + ordered_centers.Count + " centers");
 
         //Order triangles according to the ordered centers
@@ -151,7 +168,9 @@ public class Deformer : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         //This line will only work on square meshes
-        float[,] height_map = HeightMap.Generate(Mathf.Sqrt(triangles.Length));
+        float[,] height_map = HeightMap.CreateHeightMap((int)mesh_size.x, (int)mesh_size.y);
+        if (height_map.GetLength(0) * height_map.GetLength(1) != triangles.Length)
+            Debug.LogError("Height map size does not match triangle size");
         foreach (Triangle t in triangles)
         {
             MoveTriangle(t, Vector3.up, true);
