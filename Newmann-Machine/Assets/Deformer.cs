@@ -32,6 +32,83 @@ public class Deformer : MonoBehaviour
     public Vector2 mesh_size;
     void Start()
     {
+        Setup();
+
+        StartCoroutine(DeformTriangles());
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+            MoveTriangle(triangles[0], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.W))
+            MoveTriangle(triangles[1], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.A))
+            MoveTriangle(triangles[2], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.S))
+            MoveTriangle(triangles[3], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.Z))
+            MoveTriangle(triangles[4], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.X))
+            MoveTriangle(triangles[5], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.E))
+            MoveTriangle(triangles[triangles.Length - 1], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.R))
+            MoveTriangle(triangles[Random.Range(0, triangles.Length - 1)], Vector3.up, true);
+        if (Input.GetKeyDown(KeyCode.F))
+            MoveTriangle(triangles[200], Vector3.up, true);
+    }
+
+    public IEnumerator DeformTriangles()
+    {
+        yield return new WaitForSeconds(1);
+        //This line will only work on square meshes
+        //float[,] height_map = HeightMap.CreateHeightMap((int)mesh_size.x, (int)mesh_size.y);
+        //if (height_map.GetLength(0) * height_map.GetLength(1) != triangles.Length)
+            //Debug.LogError("Height map size does not match triangle size");
+        Triangle current_triangle;
+        for (int y = 0; y < mesh_size.y; y++)
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                current_triangle = triangles[(int)(y * mesh_size.x) + x];
+                MoveTriangle(current_triangle, Vector3.up *HeightMap.ApplyPerlinNoise(new Vector2(x,y), mesh_size, 0,1, 1), true);
+                Debug.Log(current_triangle.center);
+                yield return null;
+            }
+        yield return null;
+
+        Debug.Log("Went through "+ triangles.Length+" triangles");
+
+        mesh_deforming.vertices = disp_vert;
+        mesh_deforming.RecalculateNormals();
+        mesh_collider.sharedMesh = mesh_deforming;
+        yield break;
+    }
+    void MoveTriangle(Triangle t, Vector3 v, bool update)
+    {
+        t.Translate(v);
+        disp_vert[t.i1] = t.p1;
+        disp_vert[t.i2] = t.p2;
+        disp_vert[t.i3] = t.p3;
+
+        if (!update)
+            return;
+
+        mesh_deforming.vertices = disp_vert;
+        mesh_deforming.RecalculateNormals();
+
+    }
+    public void DeformVertices()
+    {
+        for (int i = 0; i < disp_vert.Length; i++)
+        {
+            disp_vert[i] += Vector3.one;
+        }
+        mesh_deforming.vertices = disp_vert;
+        mesh_deforming.RecalculateNormals();
+        mesh_collider.sharedMesh = mesh_deforming;
+    }
+    void Setup()
+    {
         //Get required components
         mesh_deforming = GetComponent<MeshFilter>().mesh;
         mesh_collider = GetComponent<MeshCollider>();
@@ -44,7 +121,7 @@ public class Deformer : MonoBehaviour
 
         //Get triangles
         int tri_index_count = mesh_deforming.triangles.Length;
-        triangles = new Triangle[tri_index_count/3];
+        triangles = new Triangle[tri_index_count / 3];
 
         int[] mesh_tris_indexes = mesh_deforming.triangles;
         Vector3[] mesh_verts = mesh_deforming.vertices;
@@ -62,9 +139,9 @@ public class Deformer : MonoBehaviour
 
         //Get a list of triangles from the mesh
         int k = 0;
-        for (int i = 0; i < triangles.Length; i ++)
+        for (int i = 0; i < triangles.Length; i++)
         {
-            triangles[i].p1 = mesh_verts[mesh_tris_indexes[i+k]];
+            triangles[i].p1 = mesh_verts[mesh_tris_indexes[i + k]];
             triangles[i].i1 = mesh_tris_indexes[i + k];
             triangles[i].p2 = mesh_verts[mesh_tris_indexes[i + 1 + k]];
             triangles[i].i2 = mesh_tris_indexes[i + 1 + k];
@@ -80,10 +157,10 @@ public class Deformer : MonoBehaviour
             triangles[i].center = bounds.center;
             centers.Add(bounds.center);
 
-            k +=2;
+            k += 2;
         }
-        Debug.Log("Cached the centers of "+centers.Count+" triangles");
-        
+        Debug.Log("Cached the centers of " + centers.Count + " triangles");
+
         //Order the list of centers we got
         List<Vector3> ordered_centers = new List<Vector3>();
         List<int> ordered_indexes = new List<int>();
@@ -139,74 +216,5 @@ public class Deformer : MonoBehaviour
         Debug.Log("Ordered " + ordered_triangles.Count + " triangles");
 
         triangles = ordered_triangles.ToArray();
-
-        StartCoroutine(DeformTriangles());
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-            MoveTriangle(triangles[0], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.W))
-            MoveTriangle(triangles[1], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.A))
-            MoveTriangle(triangles[2], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.S))
-            MoveTriangle(triangles[3], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.Z))
-            MoveTriangle(triangles[4], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.X))
-            MoveTriangle(triangles[5], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.E))
-            MoveTriangle(triangles[triangles.Length - 1], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.R))
-            MoveTriangle(triangles[Random.Range(0, triangles.Length - 1)], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.F))
-            MoveTriangle(triangles[200], Vector3.up, true);
-    }
-
-    public IEnumerator DeformTriangles()
-    {
-        yield return new WaitForSeconds(1);
-        //This line will only work on square meshes
-        float[,] height_map = HeightMap.CreateHeightMap((int)mesh_size.x, (int)mesh_size.y);
-        if (height_map.GetLength(0) * height_map.GetLength(1) != triangles.Length)
-            Debug.LogError("Height map size does not match triangle size");
-        foreach (Triangle t in triangles)
-        {
-            MoveTriangle(t, Vector3.up, true);
-            yield return null;
-        }
-        yield return null;
-
-        Debug.Log("Went through "+ triangles.Length+" triangles");
-
-        mesh_deforming.vertices = disp_vert;
-        mesh_deforming.RecalculateNormals();
-        mesh_collider.sharedMesh = mesh_deforming;
-        yield break;
-    }
-    void MoveTriangle(Triangle t, Vector3 v, bool update)
-    {
-        t.Translate(v);
-        disp_vert[t.i1] = t.p1;
-        disp_vert[t.i2] = t.p2;
-        disp_vert[t.i3] = t.p3;
-
-        if (!update)
-            return;
-
-        mesh_deforming.vertices = disp_vert;
-        mesh_deforming.RecalculateNormals();
-
-    }
-    public void DeformVertices()
-    {
-        for (int i = 0; i < disp_vert.Length; i++)
-        {
-            disp_vert[i] += Vector3.one;
-        }
-        mesh_deforming.vertices = disp_vert;
-        mesh_deforming.RecalculateNormals();
-        mesh_collider.sharedMesh = mesh_deforming;
     }
 }
