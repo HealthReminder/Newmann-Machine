@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 class Triangle
 {
@@ -33,46 +34,31 @@ public class Deformer : MonoBehaviour
     void Start()
     {
         Setup();
-
         StartCoroutine(DeformTriangles());
+
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-            MoveTriangle(triangles[0], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.W))
-            MoveTriangle(triangles[1], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.A))
-            MoveTriangle(triangles[2], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.S))
-            MoveTriangle(triangles[3], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.Z))
-            MoveTriangle(triangles[4], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.X))
-            MoveTriangle(triangles[5], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.E))
-            MoveTriangle(triangles[triangles.Length - 1], Vector3.up, true);
         if (Input.GetKeyDown(KeyCode.R))
-            MoveTriangle(triangles[Random.Range(0, triangles.Length - 1)], Vector3.up, true);
-        if (Input.GetKeyDown(KeyCode.F))
-            MoveTriangle(triangles[200], Vector3.up, true);
+            SceneManager.LoadScene(0);
     }
 
     public IEnumerator DeformTriangles()
     {
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
         //This line will only work on square meshes
         //float[,] height_map = HeightMap.CreateHeightMap((int)mesh_size.x, (int)mesh_size.y);
         //if (height_map.GetLength(0) * height_map.GetLength(1) != triangles.Length)
             //Debug.LogError("Height map size does not match triangle size");
         Triangle current_triangle;
+        float perlin_seed = Random.Range(0.0f, 1000.0f);
         for (int y = 0; y < mesh_size.y; y++)
             for (int x = 0; x < mesh_size.x; x++)
             {
                 current_triangle = triangles[(int)(y * mesh_size.x) + x];
-                MoveTriangle(current_triangle, Vector3.up *HeightMap.ApplyPerlinNoise(new Vector2(x,y), mesh_size, 0,1, 1), true);
-                Debug.Log(current_triangle.center);
-                yield return null;
+                MoveTriangle(current_triangle, Vector3.up *HeightMap.ApplyPerlinNoise(new Vector2(x,y), mesh_size, 0,0.5f, 1, perlin_seed), true);
+                Debug.Log(current_triangle.center.x);
+                //Debug.Log(current_triangle.center);
             }
         yield return null;
 
@@ -95,6 +81,8 @@ public class Deformer : MonoBehaviour
 
         mesh_deforming.vertices = disp_vert;
         mesh_deforming.RecalculateNormals();
+        mesh_deforming.RecalculateTangents();
+        mesh_deforming.RecalculateBounds();
 
     }
     public void DeformVertices()
@@ -200,10 +188,13 @@ public class Deformer : MonoBehaviour
                 if (y == current_center.y)
                     unique = false;
             if (unique)
+            {
+                Debug.Log("foun uniq");
                 unique_y.Add(current_center.y);
+            }
         }
-        float y_size = unique_y.Count;
-        mesh_size = new Vector2(triangles.Length / y_size, y_size);
+        float x_size = Mathf.Sqrt(triangles.Length / 2);
+        mesh_size = new Vector2(x_size, x_size * 2) ;
         Debug.Log("Ordered " + ordered_centers.Count + " centers");
 
         //Order triangles according to the ordered centers
