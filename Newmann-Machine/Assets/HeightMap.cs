@@ -19,13 +19,12 @@ public static class HeightMap
         return displaced_map;
     }
     */
-    public static float ApplyPerlinNoise(Vector2 coord, Vector2 size, float current_value,float roughness, float strength, float seed)
+    public static float ApplyPerlinNoise(Vector2 coord, Vector2 size, float strength,float scale, float seed)
     {
         //strength *= 2; // For Unity plane
-        //roughness *= 10; // For Unity plane
         strength *= 1; // For 2048 plane
-        roughness *= 2; // For 2048 plane
-        float new_value = current_value + Mathf.PerlinNoise(seed + coord.x / size.x * roughness, seed + coord.y / size.y * roughness * 2) *strength;
+        Vector2 scaled_coord = new Vector2(coord.x * scale / (size.x ), (coord.y * scale*2) / (size.y * scale * 2));
+        float new_value = Mathf.PerlinNoise(seed + (scaled_coord.x), seed + scaled_coord.y) *strength;
 
         return new_value; 
     }

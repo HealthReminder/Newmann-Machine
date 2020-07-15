@@ -17,6 +17,7 @@ class Triangle
         p1 += v;
         p2 += v;
         p3 += v;
+        center += v;
     }
 }
 
@@ -52,14 +53,51 @@ public class Deformer : MonoBehaviour
             //Debug.LogError("Height map size does not match triangle size");
         Triangle current_triangle;
         float perlin_seed = Random.Range(0.0f, 1000.0f);
+
+        //APPLY FOR ONE TRIANGLE
+        /*
         for (int y = 0; y < mesh_size.y; y++)
             for (int x = 0; x < mesh_size.x; x++)
             {
                 current_triangle = triangles[(int)(y * mesh_size.x) + x];
-                MoveTriangle(current_triangle, Vector3.up *HeightMap.ApplyPerlinNoise(new Vector2(x,y), mesh_size, 0,0.5f, 1, perlin_seed), true);
+                float perlin = HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, 0, 1.0f, 1, 1, perlin_seed);
+                //perlin = 1;
+                MoveTriangle(current_triangle, Vector3.up *perlin, true);
                 Debug.Log(current_triangle.center.x);
-                //Debug.Log(current_triangle.center);
+                yield return null;
+                Debug.Log(current_triangle.center + " | " +new Vector2(x,y)+ " | " + perlin);
             }
+            */
+        
+        //APPLY FOR TWO TRIANGLES
+        int odd = 0; float perlin = 0;
+        for (int y = 0; y < mesh_size.y; y++)
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                //if (x == 0 || y == 0 | x == mesh_size.x - 1 || y == mesh_size.y - 1)
+                //{ 
+                //} 
+                //else { 
+
+
+                current_triangle = triangles[(int)(y * mesh_size.x) + x];
+                //if (odd == 0)
+                perlin = HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size,100, 1, perlin_seed);
+                //ERROR IS RIGHT HERE
+                MoveTriangle(current_triangle, Vector3.up * perlin, true);
+                //GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = new Vector3(x, perlin*100,y);
+                //odd++;
+                //if (odd == 1)
+                //odd = 0;
+                //Debug.Log(current_triangle.center + " | " + new Vector2(x, y) + " | " + perlin);
+                //yield return new WaitForSeconds(0.1f);
+                //yield return null;
+
+
+                //}
+            }
+        
+
         yield return null;
 
         Debug.Log("Went through "+ triangles.Length+" triangles");
@@ -155,7 +193,7 @@ public class Deformer : MonoBehaviour
         //Every time Y changes 
         mesh_size = Vector2.zero;
         //This list will be counted to find out the dimensions of the mesh
-        List<float> unique_y = new List<float>();
+        List<float> unique_z = new List<float>();
         for (int i = 0; i < centers.Count; i++)
         {
             int new_index = ordered_centers.Count;
@@ -171,12 +209,12 @@ public class Deformer : MonoBehaviour
                     new_index = o + 1;
                 else
                 {
-                    if (current_center.y < ordered_centers[o].y)
+                    if (current_center.z < ordered_centers[o].z)
                     {
                         new_index = o;
                         break;
                     }
-                    else if (current_center.y > ordered_centers[o].y)
+                    else if (current_center.z > ordered_centers[o].z)
                         new_index = o + 1;
                 }
             }
@@ -184,17 +222,18 @@ public class Deformer : MonoBehaviour
             ordered_indexes.Insert(new_index, i);
             //Cached unique Ys
             bool unique = true;
-            foreach (float y in unique_y)
-                if (y == current_center.y)
+            foreach (float z in unique_z)
+                if (z == current_center.z)
                     unique = false;
             if (unique)
             {
                 Debug.Log("foun uniq");
-                unique_y.Add(current_center.y);
+                unique_z.Add(current_center.z);
             }
         }
-        float x_size = Mathf.Sqrt(triangles.Length / 2);
-        mesh_size = new Vector2(x_size, x_size * 2) ;
+       
+        float y_size = Mathf.Sqrt(triangles.Length / 2);
+        mesh_size = new Vector2(y_size * 2, y_size ) ;
         Debug.Log("Ordered " + ordered_centers.Count + " centers");
 
         //Order triangles according to the ordered centers
