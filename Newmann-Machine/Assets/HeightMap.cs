@@ -22,9 +22,10 @@ public static class HeightMap
     public static float ApplyPerlinNoise(Vector2 coord, Vector2 size, float strength,float scale, float seed)
     {
         //strength *= 2; // For Unity plane
-        strength *= 1; // For 2048 plane
-        Vector2 scaled_coord = new Vector2(coord.x * scale / (size.x ), (coord.y * scale*2) / (size.y * scale * 2));
-        float new_value = Mathf.PerlinNoise(seed + (scaled_coord.x), seed + scaled_coord.y) *strength;
+        strength *= 10; // For 2048 plane
+        scale = 1 / scale;
+        Vector2 scaled_coord = new Vector2(coord.x / (size.x ), (coord.y*2) / (size.y  * 2));
+        float new_value = Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) *strength;
 
         return new_value; 
     }

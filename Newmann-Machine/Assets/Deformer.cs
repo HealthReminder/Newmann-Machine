@@ -71,19 +71,30 @@ public class Deformer : MonoBehaviour
         
         //APPLY FOR TWO TRIANGLES
         int odd = 0; float perlin = 0;
+
+        float strength = Random.Range(1.0f, 3.0f);
+        float scale = Random.Range(0.01f, 1.0f);
+        Debug.Log("Generated new terraind with strength: " + strength + " and scale: " + scale);
         for (int y = 0; y < mesh_size.y; y++)
             for (int x = 0; x < mesh_size.x; x++)
             {
-                //if (x == 0 || y == 0 | x == mesh_size.x - 1 || y == mesh_size.y - 1)
-                //{ 
-                //} 
-                //else { 
-
-
+                if (x == 0 || x == 1)
+                {
+                }
+                else if (x >= mesh_size.x - 2)
+                {
+                }
+                else if (y == 0)
+                {
+                }
+                else if ( y >= mesh_size.y - 1)
+                {
+                }
+                else { 
                 current_triangle = triangles[(int)(y * mesh_size.x) + x];
                 //if (odd == 0)
-                perlin = HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size,100, 1, perlin_seed);
-                //ERROR IS RIGHT HERE
+                //2 0.2f
+                perlin = HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size,strength,scale, perlin_seed);
                 MoveTriangle(current_triangle, Vector3.up * perlin, true);
                 //GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = new Vector3(x, perlin*100,y);
                 //odd++;
@@ -94,7 +105,7 @@ public class Deformer : MonoBehaviour
                 //yield return null;
 
 
-                //}
+                }
             }
         
 
