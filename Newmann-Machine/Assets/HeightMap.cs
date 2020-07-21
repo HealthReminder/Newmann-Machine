@@ -19,14 +19,29 @@ public static class HeightMap
         return displaced_map;
     }
     */
+    #region BASE NOISES
     public static float ApplyPerlinNoise(Vector2 coord, Vector2 size, float strength,float scale, float seed)
     {
-        //strength *= 2; // For Unity plane
-        strength *= 10; // For 2048 plane
+        //Should be the same in every noise
+        strength *= 10;
         scale = 1 / scale;
         Vector2 scaled_coord = new Vector2(coord.x / (size.x ), (coord.y*2) / (size.y  * 2));
         float new_value = Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) *strength;
-
         return new_value; 
     }
+    #endregion
+    #region COMPLEMENTARY NOISES
+    public static float ApplyMagnitudeFilter(float current_value, float strength)
+    {
+        float og = current_value;
+        strength *= 10;
+        strength = 0.5f * strength;
+
+        if (current_value < strength)
+            current_value = (strength + (current_value - strength) *-1);
+
+        Debug.Log(og + " -> " + current_value + " on "+ strength);
+        return current_value;
+    }
+    #endregion
 }
