@@ -60,48 +60,52 @@ public class TerrainDeformer : MonoBehaviour
     public IEnumerator DeformTriangles()
     {
         Triangle current_triangle;
-        float perlin_seed = Random.Range(0.0f, 1000.0f);
 
         float value;
-        float strength = Random.Range(1.5f, 2.5f);
+        float modifier = 3;
+        float strength = Random.Range(1.5f, 2.2f);
         float scale = Random.Range(0.1f, 0.3f);
-        Debug.Log("Generated new terraind with strength: " + strength + " and scale: " + scale);
-        yield return new WaitForSeconds(1);
-        for (int y = 0; y < mesh_size.y; y++)
+        Debug.Log("Generated new terrain with strength: " + strength + " and scale: " + scale);
+        for (int iteration  = 1; iteration <= 8; iteration++)
         {
-            yield return new WaitForSeconds(0.05f);
-            for (int x = 0; x < mesh_size.x; x++)
+            float perlin_seed = Random.Range(0.0f, 1000.0f);
+            for (int y = 0; y < mesh_size.y; y++)
             {
-                if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                yield return new WaitForSeconds(0.025f);
+                for (int x = 0; x < mesh_size.x; x++)
                 {
-                }
-                else
-                {
-                    current_triangle = triangles[(int)(y * mesh_size.x) + x];
-                    value = (HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, strength, scale, perlin_seed));
-                    current_triangle.value = value;
-                    MoveTriangle(current_triangle, Vector3.up * current_triangle.value, true);
+                    if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                    {
+                    }
+                    else
+                    {
+                        current_triangle = triangles[(int)(y * mesh_size.x) + x];
+                        value = (HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, strength/iteration* modifier, scale/iteration * modifier, perlin_seed));
+                        current_triangle.value = value;
+                        MoveTriangle(current_triangle, Vector3.up * current_triangle.value, true);
+                    }
                 }
             }
         }
-        for (int y = 0; y < mesh_size.y; y++)
-        {
-            yield return new WaitForSeconds(0.05f);
-            for (int x = 0; x < mesh_size.x; x++)
+        for (int r = 0; r < 0; r++)
+            for (int y = 0; y < mesh_size.y; y++)
             {
-                if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                yield return new WaitForSeconds(0.025f);
+                for (int x = 0; x < mesh_size.x; x++)
                 {
-                }
-                else
-                {
-                    current_triangle = triangles[(int)(y * mesh_size.x) + x];
-                    value = HeightMap.ApplyMagnitudeFilter(current_triangle.value, strength);
-                    current_triangle.value = value;
-                    SetTriangle(current_triangle, Vector3.up * current_triangle.value, true);
-                }
+                    if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                    {
+                    }
+                    else
+                    {
+                        current_triangle = triangles[(int)(y * mesh_size.x) + x];
+                        value = HeightMap.ApplyMagnitudeFilter(current_triangle.value, strength);
+                        current_triangle.value = value;
+                        MoveTriangle(current_triangle, Vector3.up * current_triangle.value, true);
+                    }
 
+                }
             }
-        }
 
         yield return null;
 
