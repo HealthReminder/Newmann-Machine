@@ -1,23 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable] public class Planetoid
 {
-    //public
+    public Gradient terrain_colors;
 }
 public class GameManager : MonoBehaviour
 {
-    public TerrainDeformer terrain;
-    [SerializeField] public Planetoid planetoid;
+    [Header("Instanced for generation")]
+    public Terrain terrain;
+    [Header("Cached info for generation")]
+    public Gradient possible_terrain_color;
+    [Header("Planetoid Info")]
+    [SerializeField] public Planetoid current_planetoid;
+
     void Start()
     {
-        
+        StartCoroutine(SetupRoutine());
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene(0);
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SetupRoutine()
     {
-        
+        GeneratePlanetoid();
+        yield return StartCoroutine(terrain.DeformTrianglesRandomly());
+        yield return StartCoroutine(terrain.ColorHeight(current_planetoid.terrain_colors));
+        yield break;
+    }
+
+    void GeneratePlanetoid ()
+    {
+        current_planetoid = new Planetoid();
+        current_planetoid.terrain_colors = possible_terrain_color;
     }
 }
