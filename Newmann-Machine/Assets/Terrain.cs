@@ -76,7 +76,7 @@ public class Terrain : MonoBehaviour
         float scale = Random.Range(0.1f, 0.3f);
         Debug.Log("Generated new terrain with strength: " + strength + " and scale: " + scale);
         //8
-        for (int iteration = 1; iteration <= 0; iteration++)
+        for (int iteration = 1; iteration <= 8; iteration++)
         {
             float perlin_seed = Random.Range(0.0f, 1000.0f);
             for (int y = 0; y < mesh_size.y; y++)
@@ -91,8 +91,8 @@ public class Terrain : MonoBehaviour
                     {
                         current_triangle = triangles[(int)(y * mesh_size.x) + x];
                         value = (HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, strength / iteration * modifier, scale / iteration * modifier, perlin_seed));
-                        current_triangle.value = value;
-                        MoveTriangle(current_triangle, Vector3.up * 10 * current_triangle.value, true);
+                        current_triangle.value += value;
+                        SetTriangle(current_triangle, Vector3.up * 10 * current_triangle.value, true);
                     }
                 }
             }
@@ -102,9 +102,9 @@ public class Terrain : MonoBehaviour
         for (int i = 0; i < triangles.Length; i++)
             voronoi[i] = triangles[i].value;
         
-        for (int iteration = 1; iteration <= 1; iteration++)
+        for (int iteration = 1; iteration <= 3; iteration++)
         {
-            voronoi = HeightMap.ApplyVoronoiNoise(voronoi, mesh_size, Random.Range(0.1f, 0.05f) , Random.Range(5.0f, 20.0f) , Random.Range(2.0f, 3.5f));
+            voronoi = HeightMap.ApplyVoronoiNoise(voronoi, mesh_size, Random.Range(0.002f, 0.2f) , 8f, 100f, Random.Range(2.0f, 3.5f)/iteration);
             float perlin_seed = Random.Range(0.0f, 1000.0f);
             for (int y = 0; y < mesh_size.y; y++)
             {

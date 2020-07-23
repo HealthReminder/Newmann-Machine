@@ -20,18 +20,35 @@ public static class HeightMap
     }
     */
     #region BASE NOISES
-    public static float[] ApplyVoronoiNoise(float [] values, Vector2 size, float scale, float radius, float strength)
+    public static float[] ApplyVoronoiNoise(float [] values, Vector2 size, float scale,float radius, float point_range, float strength)
     {
         float[] result = new float[values.Length];
         for (int i = 0; i < values.Length; i++)
             result[i] = values[i];
         
 
-        Debug.Log("Applying voronoi of scale: " + scale + " radius: " + radius + " strength: " + strength);
+        Debug.Log("Applying voronoi of scale: " + scale + " radius: " +radius +" with range of: "+ point_range + " strength: " + strength);
         //Point equal distribution
         List<Vector2> points = new List<Vector2>();
+        int frequency = (int)(1 / scale);
+        Debug.Log(frequency);
+        //It generates one third more points than neeeded so they can me shifted around
+        for (int y = 0; y < size.y * 2; y++)
+        {
+            if (y % frequency == 0)
+                for (int x = 0; x < size.x * 2; x++)
+                {
+                    if (x % frequency == 0)
+                    {
+                        Vector2 p = new Vector2(
+                            x - 2 + Random.Range(point_range / 20, point_range / 10),
+                            y / 2 - 2 + Random.Range(point_range / 20, point_range / 10));
+                        points.Add(p);
+                    }
+                }
+        }
 
-        for (int y = 0; y < (size.y*scale)+1; y++)
+        /*for (int y = 0; y < (size.y*scale)+1; y++)
         {
             for (int x = 0; x < (size.x*scale); x++)
             {
@@ -47,10 +64,10 @@ public static class HeightMap
 
                 points.Add(p);
             }
-        }
+        }*/
 
 
-        
+
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
@@ -91,7 +108,7 @@ public static class HeightMap
         //Should be the same in every noise
         scale = 1 / scale;
         Vector2 scaled_coord = new Vector2(coord.x / (size.x), (coord.y * 2) / (size.y * 2));
-        float new_value = Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * strength;
+        float new_value = Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1;
         return new_value;
     }
     #endregion
