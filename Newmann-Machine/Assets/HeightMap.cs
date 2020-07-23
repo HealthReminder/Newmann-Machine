@@ -48,26 +48,6 @@ public static class HeightMap
                 }
         }
 
-        /*for (int y = 0; y < (size.y*scale)+1; y++)
-        {
-            for (int x = 0; x < (size.x*scale); x++)
-            {
-                Vector2 p = new Vector2(x, y);
-
-                //Distribute accordingly
-                p.x = x * 1 / scale;
-                p.y = y * 1 / scale ;
-
-                p.x += size.x * scale;
-                p.y += size.y * scale*2;
-
-
-                points.Add(p);
-            }
-        }*/
-
-
-
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
@@ -96,14 +76,14 @@ public static class HeightMap
                         //This is a low land value
                         //Could be used for interesting exotic planets
 
-                    result[i] = result[i] + (value*strength);
+                    result[i] += (value*strength);
                 }
                 
             }
         }
         return result;
     }
-    public static float ApplyPerlinNoise(Vector2 coord, Vector2 size, float strength, float scale, float seed)
+    public static float ApplyPerlinNoise(Vector2 coord, Vector2 size, float scale, float seed)
     {
         //Should be the same in every noise
         scale = 1 / scale;

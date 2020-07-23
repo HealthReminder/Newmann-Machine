@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -44,25 +43,45 @@ public class Terrain : MonoBehaviour
     Triangle[] triangles;
     //Used to generate maps //read-only
     public Vector2 mesh_size;
+
+    public Vector2 minmax_Y;
     void Awake()
     {
         Setup();
     }
-    public IEnumerator ColorHeight(Gradient colors)
+    public void GetMinMaxHeight()
+    {
+        float max = -9999;
+        float min = 9999;
+        foreach (Triangle t in triangles)
+            if(t.value != 0)
+            {
+                if (t.value < min)
+                    min = t.value;
+                if (t.value > max)
+                    max = t.value;
+            }
+        
+        minmax_Y = new Vector2(min,max);
+    }
+    public IEnumerator ColorHeight(Gradient gradient)
     {
         //colors.Evaluate(Random.Range(0.0f, 1.0f))
-        Color32[] c = new Color32[mesh_deforming.colors32.Length];
-        for (int i = 0; i < c.Length; i++)
+        Debug.Log("HEY0");
+        Color[] vertex_colors = new Color[mesh_deforming.vertices.Length];
+        for (int y = 0; y < mesh_size.y; y++)
         {
-            c[i] = Color.red;
             yield return null;
-
+            for (int x = 0; x < mesh_size.x; x++) { 
+                   int i = (int)(y * mesh_size.x) + x;
+                Triangle current_triangle = triangles[i];
+                float lerp = Mathf.InverseLerp(minmax_Y.x, minmax_Y.y, current_triangle.value);
+                vertex_colors[current_triangle.i1] = vertex_colors[current_triangle.i2] = vertex_colors[current_triangle.i3] = gradient.Evaluate(lerp);
+                Debug.Log(lerp);
+                mesh_deforming.colors = vertex_colors;
+            }
         }
-        mesh_deforming.colors32 = c;
-        mesh_deforming.SetColors(c);
-        mesh_deforming.Optimize();
-        mesh_deforming.RecalculateTangents();
-        mesh_deforming.RecalculateNormals();
+        mesh_deforming.colors = vertex_colors;
         Debug.Log("Applied random colors");
         yield break;
     }
@@ -71,12 +90,12 @@ public class Terrain : MonoBehaviour
         Triangle current_triangle;
 
         float value;
-        float modifier = 3;
-        float strength = Random.Range(1.5f, 2.2f);
-        float scale = Random.Range(0.1f, 0.3f);
+        float modifier = 2;
+        float strength = Random.Range(4.0f, 7.0f);
+        float scale = Random.Range(0.4f, 0.8f);
         Debug.Log("Generated new terrain with strength: " + strength + " and scale: " + scale);
         //8
-        for (int iteration = 1; iteration <= 8; iteration++)
+        for (int iteration = 1; iteration <= 6; iteration++)
         {
             float perlin_seed = Random.Range(0.0f, 1000.0f);
             for (int y = 0; y < mesh_size.y; y++)
@@ -90,9 +109,9 @@ public class Terrain : MonoBehaviour
                     else
                     {
                         current_triangle = triangles[(int)(y * mesh_size.x) + x];
-                        value = (HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, strength / iteration * modifier, scale / iteration * modifier, perlin_seed));
+                        value = HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, scale / iteration * modifier, perlin_seed);
                         current_triangle.value += value;
-                        SetTriangle(current_triangle, Vector3.up * 10 * current_triangle.value, true);
+                        SetTriangle(current_triangle, (Vector3.up * 10 * current_triangle.value)*strength / iteration * modifier, true);
                     }
                 }
             }
@@ -102,7 +121,7 @@ public class Terrain : MonoBehaviour
         for (int i = 0; i < triangles.Length; i++)
             voronoi[i] = triangles[i].value;
         
-        for (int iteration = 1; iteration <= 3; iteration++)
+        for (int iteration = 1; iteration <= 0; iteration++)
         {
             voronoi = HeightMap.ApplyVoronoiNoise(voronoi, mesh_size, Random.Range(0.002f, 0.2f) , 8f, 100f, Random.Range(2.0f, 3.5f)/iteration);
             float perlin_seed = Random.Range(0.0f, 1000.0f);
@@ -117,7 +136,7 @@ public class Terrain : MonoBehaviour
                     else
                     {
                         int i = (int)(y * mesh_size.x) + x;
-                        triangles[i].value = voronoi[i];
+                        triangles[i].value += voronoi[i];
                         SetTriangle(triangles[i], Vector3.up * 10 * triangles[i].value, true);
                     }
                 }
@@ -136,14 +155,15 @@ public class Terrain : MonoBehaviour
                     else
                     {
                         current_triangle = triangles[(int)(y * mesh_size.x) + x];
-                        value = HeightMap.ApplyMagnitudeFilter(current_triangle.value, strength,0.7f);
-                        current_triangle.value = value;
+                        value = HeightMap.ApplyMagnitudeFilter(current_triangle.value, strength, 0.7f);
                         MoveTriangle(current_triangle, Vector3.up * current_triangle.value, true);
                     }
 
                 }
             }
         Debug.Log("Applied magnitude filter");
+
+        GetMinMaxHeight();
 
 
         yield return null;
