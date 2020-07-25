@@ -49,6 +49,39 @@ public class Terrain : MonoBehaviour
     {
         Setup();
     }
+    void ClampHeight()
+    {
+        //This function needs the min height of the terrain to work
+        //It could be improved with the min Y as a parameter ?
+        if (minmax_Y.x == 0)
+            GetMinMaxHeight();
+
+        Triangle current_triangle;
+        Vector2 clamp = new Vector2(0, 100);
+        for (int y = 0; y < mesh_size.y; y++)
+        {
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                {
+                }
+                else
+                {
+                    current_triangle = triangles[(int)(y * mesh_size.x) + x];
+                    float p = Mathf.InverseLerp(minmax_Y.x, minmax_Y.y, current_triangle.value);
+                    p = Mathf.Lerp(clamp.x, clamp.y, p);
+                    current_triangle.value = p;
+                    //Debug.Log("Min Y: " + minmax_Y.x + " Original value: " + current_triangle.value);
+                    //current_triangle.value -= minmax_Y.x - 1;
+                    //Debug.Log("Changed value: " + current_triangle.value);
+
+                    SetTriangle(current_triangle, (Vector3.up * current_triangle.value), false);
+                }
+            }
+        }
+        minmax_Y = clamp;
+
+    }
     public void GetMinMaxHeight()
     {
         float max = -9999;
@@ -67,17 +100,17 @@ public class Terrain : MonoBehaviour
     public IEnumerator ColorHeight(Gradient gradient)
     {
         //colors.Evaluate(Random.Range(0.0f, 1.0f))
-        Debug.Log("HEY0");
+        Debug.Log("HEY");
         Color[] vertex_colors = new Color[mesh_deforming.vertices.Length];
         for (int y = 0; y < mesh_size.y; y++)
         {
             yield return null;
-            for (int x = 0; x < mesh_size.x; x++) { 
-                   int i = (int)(y * mesh_size.x) + x;
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                int i = (int)(y * mesh_size.x) + x;
                 Triangle current_triangle = triangles[i];
                 float lerp = Mathf.InverseLerp(minmax_Y.x, minmax_Y.y, current_triangle.value);
                 vertex_colors[current_triangle.i1] = vertex_colors[current_triangle.i2] = vertex_colors[current_triangle.i3] = gradient.Evaluate(lerp);
-                Debug.Log(lerp);
                 mesh_deforming.colors = vertex_colors;
             }
         }
@@ -85,22 +118,82 @@ public class Terrain : MonoBehaviour
         Debug.Log("Applied random colors");
         yield break;
     }
+    public IEnumerator ColorMajority()
+    {
+        //colors.Evaluate(Random.Range(0.0f, 1.0f))
+        Debug.Log("Averaged colors of terrain.");
+        Color[] vertex_colors = new Color[mesh_deforming.vertices.Length];
+        for (int k = 0; k < vertex_colors.Length; k++)
+            vertex_colors[k] = mesh_deforming.colors[k];
+
+        for (int y = 0; y < mesh_size.y; y++)
+        {
+            yield return null;
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                int i = (int)(y * mesh_size.x) + x;
+                Triangle t = triangles[i];
+
+                Color[] c = new Color[3];
+                c[0] = vertex_colors[t.i1];
+                c[1] = vertex_colors[t.i2];
+                c[2] = vertex_colors[t.i3];
+                Color major_color = c[2];
+                if (c[0] == c[1] || c[0] == c[2])
+                    major_color = c[0];
+                else
+                    major_color = c[1];
+                vertex_colors[t.i1] = vertex_colors[t.i2] = vertex_colors[t.i3] = major_color;
+            }
+        }
+        mesh_deforming.colors = vertex_colors;
+        Debug.Log("Applied random colors");
+        yield break;
+    }
+    public IEnumerator ColorAverage()
+    {
+        Color[] vertex_colors = new Color[mesh_deforming.vertices.Length];
+        for (int k = 0; k < vertex_colors.Length; k++)
+            vertex_colors[k] = mesh_deforming.colors[k];
+
+        for (int y = 0; y < mesh_size.y; y++)
+        {
+            yield return null;
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                int i = (int)(y * mesh_size.x) + x;
+                Triangle t = triangles[i];
+
+                float[] c = new float[4];
+                c[0] = vertex_colors[t.i1].r + vertex_colors[t.i2].r + vertex_colors[t.i3].r;
+                c[1] = vertex_colors[t.i1].g + vertex_colors[t.i2].g + vertex_colors[t.i3].g;
+                c[2] = vertex_colors[t.i1].b + vertex_colors[t.i2].b + vertex_colors[t.i3].b;
+                c[3] = vertex_colors[t.i1].a + vertex_colors[t.i2].a + vertex_colors[t.i3].a;
+                Color average_color = new Color(c[0] / 3, c[1] / 3, c[2] / 3, c[3] / 3);
+                vertex_colors[t.i1] = vertex_colors[t.i2] = vertex_colors[t.i3] = average_color;
+            }
+        }
+        mesh_deforming.colors = vertex_colors;
+        Debug.Log("Averaged colors of terrain.");
+
+        yield break;
+    }
     public IEnumerator DeformTrianglesRandomly()
     {
         Triangle current_triangle;
 
         float value;
-        float modifier = 2;
-        float strength = Random.Range(4.0f, 7.0f);
-        float scale = Random.Range(0.4f, 0.8f);
+        float strength = Random.Range(10.0f*1, 10.0f * 1);
+        //2f to far away 2x vision
+        //xf to close 5x vision
+        float scale = Random.Range(4f, 4f);
         Debug.Log("Generated new terrain with strength: " + strength + " and scale: " + scale);
         //8
-        for (int iteration = 1; iteration <= 6; iteration++)
+        for (int i = 1; i <= 20; i++)
         {
             float perlin_seed = Random.Range(0.0f, 1000.0f);
             for (int y = 0; y < mesh_size.y; y++)
             {
-                yield return null;
                 for (int x = 0; x < mesh_size.x; x++)
                 {
                     if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
@@ -108,19 +201,47 @@ public class Terrain : MonoBehaviour
                     }
                     else
                     {
+                        float iteration = i;
                         current_triangle = triangles[(int)(y * mesh_size.x) + x];
-                        value = HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, scale / iteration * modifier, perlin_seed);
+                        value = HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, scale / iteration, perlin_seed);
                         current_triangle.value += value;
-                        SetTriangle(current_triangle, (Vector3.up * 10 * current_triangle.value)*strength / iteration * modifier, true);
+                        SetTriangle(current_triangle, (Vector3.up * current_triangle.value), true);
                     }
                 }
             }
+            yield return null;
+
         }
+
+        for (int i = 1; i <= 10; i++)
+        {
+            float perlin_seed = Random.Range(0.0f, 1000.0f);
+            for (int y = 0; y < mesh_size.y; y++)
+            {
+                for (int x = 0; x < mesh_size.x; x++)
+                {
+                    if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                    {
+                    }
+                    else
+                    {
+                        float iteration = i;
+                        current_triangle = triangles[(int)(y * mesh_size.x) + x];
+                        value = HeightMap.ApplyPerlinNoise(new Vector2(x, y), mesh_size, scale / iteration, perlin_seed);
+                        current_triangle.value += value;
+                        SetTriangle(current_triangle, (Vector3.up * current_triangle.value) * strength / iteration, true);
+                    }
+                }
+            }
+            yield return null;
+
+        }
+
         Debug.Log("Applied perlin noise");
         float [] voronoi = new float[triangles.Length];
         for (int i = 0; i < triangles.Length; i++)
             voronoi[i] = triangles[i].value;
-        
+
         for (int iteration = 1; iteration <= 0; iteration++)
         {
             voronoi = HeightMap.ApplyVoronoiNoise(voronoi, mesh_size, Random.Range(0.002f, 0.2f) , 8f, 100f, Random.Range(2.0f, 3.5f)/iteration);
@@ -137,7 +258,7 @@ public class Terrain : MonoBehaviour
                     {
                         int i = (int)(y * mesh_size.x) + x;
                         triangles[i].value += voronoi[i];
-                        SetTriangle(triangles[i], Vector3.up * 10 * triangles[i].value, true);
+                        SetTriangle(triangles[i], Vector3.up * triangles[i].value, true);
                     }
                 }
             }
@@ -161,9 +282,13 @@ public class Terrain : MonoBehaviour
 
                 }
             }
+
         Debug.Log("Applied magnitude filter");
 
         GetMinMaxHeight();
+        yield return new WaitForSeconds(1);
+        ClampHeight();
+        Debug.Log("Clamped terrain");
 
 
         yield return null;
@@ -237,12 +362,6 @@ public class Terrain : MonoBehaviour
 
         int[] mesh_tris_indexes = mesh_deforming.triangles;
         Vector3[] mesh_verts = mesh_deforming.vertices;
-
-        //Debug.Log("Triangle count: " + triangles.Length);
-        //Debug.Log("Triangle indexes count: " + mesh_tris_indexes.Length);
-        //Debug.Log("Vertices count: " + mesh_verts.Length);
-
-       
 
         //This list will be used to order the triangle list
         //Cacheing it separately makes it easier to sort the distances;
@@ -335,6 +454,7 @@ public class Terrain : MonoBehaviour
         Debug.Log("Ordered " + ordered_triangles.Count + " triangles");
 
         triangles = ordered_triangles.ToArray();
+        minmax_Y = Vector2.zero;
     }
     #endregion
 }

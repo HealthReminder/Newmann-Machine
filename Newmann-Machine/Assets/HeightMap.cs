@@ -31,7 +31,6 @@ public static class HeightMap
         //Point equal distribution
         List<Vector2> points = new List<Vector2>();
         int frequency = (int)(1 / scale);
-        Debug.Log(frequency);
         //It generates one third more points than neeeded so they can me shifted around
         for (int y = 0; y < size.y * 2; y++)
         {

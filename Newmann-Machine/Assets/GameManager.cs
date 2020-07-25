@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Instanced for generation")]
     public Terrain terrain;
     [Header("Cached info for generation")]
-    public Gradient possible_terrain_color;
+    public Gradient[] possible_terrain_colors;
     [Header("Planetoid Info")]
     [SerializeField] public Planetoid current_planetoid;
 
@@ -31,12 +31,16 @@ public class GameManager : MonoBehaviour
         GeneratePlanetoid();
         yield return StartCoroutine(terrain.DeformTrianglesRandomly());
         yield return StartCoroutine(terrain.ColorHeight(current_planetoid.terrain_colors));
+        //Smoothes colors
+        yield return StartCoroutine(terrain.ColorAverage());
+        //Does not work as intended
+        //yield return StartCoroutine(terrain.ColorMajority());
         yield break;
     }
 
     void GeneratePlanetoid ()
     {
         current_planetoid = new Planetoid();
-        current_planetoid.terrain_colors = possible_terrain_color;
+        current_planetoid.terrain_colors = possible_terrain_colors[Random.Range(0,possible_terrain_colors.Length)];
     }
 }
