@@ -19,11 +19,25 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SetupRoutine());
+        StartCoroutine(AutomatedGeneration(5));
+
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(0);
+    }
+    IEnumerator AutomatedGeneration(float delay)
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        while (true)
+        {
+            yield return new WaitForSeconds(delay);
+            StartCoroutine(SetupRoutine());
+
+
+        }
     }
 
     IEnumerator SetupRoutine()

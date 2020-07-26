@@ -20,14 +20,14 @@ public static class HeightMap
     }
     */
     #region BASE NOISES
-    public static float[] ApplyVoronoiNoise(float [] values, Vector2 size, float scale,float radius, float point_range, float strength)
+    public static float[] ApplyVoronoiNoise(float[] values, Vector2 size, float scale, float radius, float point_range, float strength)
     {
         float[] result = new float[values.Length];
         for (int i = 0; i < values.Length; i++)
             result[i] = values[i];
-        
 
-        Debug.Log("Applying voronoi of scale: " + scale + " radius: " +radius +" with range of: "+ point_range + " strength: " + strength);
+
+        Debug.Log("Applying voronoi of scale: " + scale + " radius: " + radius + " with range of: " + point_range + " strength: " + strength);
         //Point equal distribution
         List<Vector2> points = new List<Vector2>();
         int frequency = (int)(1 / scale);
@@ -69,36 +69,55 @@ public static class HeightMap
                     }
 
                     //Get the value based on the distance and the radius
-                    float value = 1-Mathf.InverseLerp(0, radius, distance_to_closest);
+                    float value = 1 - Mathf.InverseLerp(0, radius, distance_to_closest);
 
                     //if( value <= 0)
-                        //This is a low land value
-                        //Could be used for interesting exotic planets
+                    //This is a low land value
+                    //Could be used for interesting exotic planets
 
-                    result[i] += (value*strength);
+                    result[i] += (value * strength);
                 }
-                
+
             }
         }
         return result;
     }
-    public static float ApplyPerlinNoise(Vector2 coord, Vector2 size, float scale, float seed)
+    public static float[] ApplyPerlinNoise(float[] values, Vector2 mesh_size, float scale, float strength)
     {
-        //Should be the same in every noise
+        float seed = Random.Range(0.0f, 1000.0f);
+        float[] new_values = new float[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            new_values[i] = values[i];
+
         scale = 1 / scale;
-        Vector2 scaled_coord = new Vector2(coord.x / (size.x), (coord.y * 2) / (size.y * 2));
-        float new_value = Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1;
-        return new_value;
+        for (int y = 0; y < mesh_size.y; y++)
+        {
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                {
+                }
+                else
+                {
+                    Vector2 coord = new Vector2(x, y);
+                    Vector2 scaled_coord = new Vector2(coord.x / (mesh_size.x), (coord.y * 2) / (mesh_size.y * 2));
+                    new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1;
+                    if(x== 5&& y == 5)
+                    Debug.Log(new_values[(int)(y * mesh_size.x) + x] +" plus "+ strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1);
+                }
+            }
+        }
+        return new_values;
     }
     #endregion
     #region COMPLEMENTARY NOISES
-    public static float ApplyMagnitudeFilter(float current_value, float strength,float invert_ratio)
+    public static float ApplyMagnitudeFilter(float current_value, float strength, float invert_ratio)
     {
         float og = current_value;
         strength = invert_ratio * strength;
 
         if (current_value < strength)
-            current_value = (strength + (current_value - strength) *-1);
+            current_value = (strength + (current_value - strength) * -1);
         return current_value;
     }
     #endregion
