@@ -20,17 +20,20 @@ public static class HeightMap
     }
     */
     #region BASE NOISES
-    public static float[] ApplyVoronoiNoise(float[] values, Vector2 size, float scale, float radius, float point_range, float strength)
+    public static float[] ApplyVoronoiNoise(float[] values, Vector2 size, float scale, float point_range)
     {
+        //Variables below should not change often
+        float radius = 250f;
+
         float[] result = new float[values.Length];
         for (int i = 0; i < values.Length; i++)
             result[i] = values[i];
 
 
-        Debug.Log("Applying voronoi of scale: " + scale + " radius: " + radius + " with range of: " + point_range + " strength: " + strength);
+        Debug.Log("Applying voronoi of scale: " + scale + " radius: " + radius + " with point range of: " + point_range);
         //Point equal distribution
         List<Vector2> points = new List<Vector2>();
-        int frequency = (int)(1 / scale);
+        int frequency = (int)(1 / scale)+1;
         //It generates one third more points than neeeded so they can me shifted around
         for (int y = 0; y < size.y * 2; y++)
         {
@@ -75,7 +78,7 @@ public static class HeightMap
                     //This is a low land value
                     //Could be used for interesting exotic planets
 
-                    result[i] += (value * strength);
+                    result[i] += (value);
                 }
 
             }
@@ -102,8 +105,8 @@ public static class HeightMap
                     Vector2 coord = new Vector2(x, y);
                     Vector2 scaled_coord = new Vector2(coord.x / (mesh_size.x), (coord.y * 2) / (mesh_size.y * 2));
                     new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1;
-                    if(x== 5&& y == 5)
-                    Debug.Log(new_values[(int)(y * mesh_size.x) + x] +" plus "+ strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1);
+                    //if(x== 5&& y == 5)
+                    //Debug.Log(new_values[(int)(y * mesh_size.x) + x] +" plus "+ strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1);
                 }
             }
         }

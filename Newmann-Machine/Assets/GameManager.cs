@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[System.Serializable] public class Planetoid
+[System.Serializable]
+public class Planetoid
 {
     public Gradient terrain_colors;
 }
@@ -19,7 +20,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SetupRoutine());
-        StartCoroutine(AutomatedGeneration(5));
 
     }
     private void Update()
@@ -27,34 +27,34 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(0);
     }
-    IEnumerator AutomatedGeneration(float delay)
-    {
-        yield return new WaitForSeconds(5.0f);
-
-        while (true)
-        {
-            yield return new WaitForSeconds(delay);
-            StartCoroutine(SetupRoutine());
-
-
-        }
-    }
 
     IEnumerator SetupRoutine()
     {
-        GeneratePlanetoid();
-        yield return StartCoroutine(terrain.DeformTrianglesRandomly());
-        yield return StartCoroutine(terrain.ColorHeight(current_planetoid.terrain_colors));
-        //Smoothes colors
-        yield return StartCoroutine(terrain.ColorAverage());
-        //Does not work as intended
-        //yield return StartCoroutine(terrain.ColorMajority());
+        while (true) {
+            //terrain.Reset();
+            Random.InitState(Random.Range(0,999999));
+            GeneratePlanetoid();
+            //Height range is decided by the strength of gravity in the planet
+            //Passes make the planet rougher 
+            yield return StartCoroutine(terrain.DeformPerlin(5.0f));
+            //Scale is how scatterred the dunes are. Lower decimal values mean further away dunes. Bigger numbers means EXPONENTIALLY more clustered dunes 0.1f -> large, 0.2f -> medium, 0.5f -> small, 1.0f -> tiny.
+            //Point range is how much the dunes spread, how much their arch reaches.
+            //yield return StartCoroutine(terrain.DeformX(0.2f));
+            yield return StartCoroutine(terrain.ColorHeight(current_planetoid.terrain_colors));
+            yield return StartCoroutine(terrain.ClampHeight(0,20));
+            //Smoothes colors
+            yield return StartCoroutine(terrain.ColorAverage());
+            //Does not work as intended
+            //yield return StartCoroutine(terrain.ColorMajority());
+            yield return new WaitForSeconds(4.0f);
+
+        }
         yield break;
     }
 
-    void GeneratePlanetoid ()
+    void GeneratePlanetoid()
     {
         current_planetoid = new Planetoid();
-        current_planetoid.terrain_colors = possible_terrain_colors[Random.Range(0,possible_terrain_colors.Length)];
+        current_planetoid.terrain_colors = possible_terrain_colors[Random.Range(0, possible_terrain_colors.Length)];
     }
 }
