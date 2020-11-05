@@ -1823,15 +1823,15 @@ MonoBehaviour:
     key1: {r: 0.9254902, g: 0.5019608, b: 0.6327906, a: 1}
     key2: {r: 0.96862745, g: 0.6901961, b: 0.850011, a: 0}
     key3: {r: 0.94054127, g: 0.6839622, b: 1, a: 0}
-    key4: {r: 1, g: 0.8820755, b: 0.94343245, a: 0}
-    key5: {r: 1, g: 1, b: 1, a: 0}
+    key4: {r: 0.9947793, g: 0.8646803, b: 0.9483993, a: 0}
+    key5: {r: 0.9811321, g: 0.88975275, b: 0.54147387, a: 0}
     key6: {r: 1, g: 1, b: 1, a: 0}
     key7: {r: 1, g: 1, b: 1, a: 0}
     ctime0: 193
-    ctime1: 5397
-    ctime2: 9445
+    ctime1: 8288
+    ctime2: 14264
     ctime3: 26021
-    ctime4: 65535
+    ctime4: 58789
     ctime5: 65535
     ctime6: 65535
     ctime7: 65535
@@ -1844,22 +1844,22 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 5
+    m_NumColorKeys: 6
     m_NumAlphaKeys: 2
   - serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
     key1: {r: 0.5019608, g: 0.55701, b: 0.9254902, a: 1}
     key2: {r: 0.4719206, g: 0.74725044, b: 0.990566, a: 0}
     key3: {r: 0.7358491, g: 0.8099332, b: 0.9811321, a: 0}
-    key4: {r: 0.84445304, g: 0.7311321, b: 1, a: 0}
-    key5: {r: 1, g: 1, b: 1, a: 0}
+    key4: {r: 0.83067894, g: 0.7411263, b: 0.997607, a: 0}
+    key5: {r: 0.637104, g: 0.9716981, b: 0.9680459, a: 0}
     key6: {r: 1, g: 1, b: 1, a: 0}
     key7: {r: 1, g: 1, b: 1, a: 0}
     ctime0: 193
-    ctime1: 5397
-    ctime2: 9445
+    ctime1: 7517
+    ctime2: 13300
     ctime3: 26021
-    ctime4: 65535
+    ctime4: 58018
     ctime5: 65535
     ctime6: 65535
     ctime7: 65535
@@ -1872,7 +1872,35 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 5
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  - serializedVersion: 2
+    key0: {r: 0.23552026, g: 0.23099858, b: 0.2735849, a: 1}
+    key1: {r: 0.8490566, g: 0.2986071, b: 0.2683339, a: 1}
+    key2: {r: 1, g: 0.547612, b: 0.5330188, a: 0}
+    key3: {r: 0.7137255, g: 1, b: 0.8634926, a: 0}
+    key4: {r: 0.42745098, g: 0.79209423, b: 0.8784314, a: 0}
+    key5: {r: 0.33882165, g: 0.5248974, b: 0.8867924, a: 0}
+    key6: {r: 0.9080874, g: 0.6179246, b: 1, a: 0}
+    key7: {r: 1, g: 1, b: 1, a: 0}
+    ctime0: 193
+    ctime1: 4819
+    ctime2: 9445
+    ctime3: 15227
+    ctime4: 31226
+    ctime5: 58211
+    ctime6: 65535
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 7
     m_NumAlphaKeys: 2
   current_planetoid:
     terrain_colors:

@@ -20,8 +20,12 @@ public static class HeightMap
     }
     */
     #region BASE NOISES
-    public static float[] ApplyVoronoiNoise(float[] values, Vector2 size, float scale, float point_range)
+    public static float[] ApplyVoronoiNoise(int seed, float[] values, Vector2 size, float scale, float point_range)
     {
+        //Set point offset according to seed
+        float offset_x = Random.Range(0, point_range / 2);
+        float offset_y = Random.Range(0, point_range / 2);
+
         //Variables below should not change often
         float radius = 250f;
 
@@ -43,8 +47,8 @@ public static class HeightMap
                     if (x % frequency == 0)
                     {
                         Vector2 p = new Vector2(
-                            x - 2 + Random.Range(point_range / 20, point_range / 10),
-                            y / 2 - 2 + Random.Range(point_range / 20, point_range / 10));
+                            x - 2 + Random.Range(point_range / 2, point_range),
+                            y / 2 - 2 + Random.Range(point_range / 2, point_range));
                         points.Add(p);
                     }
                 }
@@ -85,9 +89,8 @@ public static class HeightMap
         }
         return result;
     }
-    public static float[] ApplyPerlinNoise(float[] values, Vector2 mesh_size, float scale, float strength)
+    public static float[] ApplyPerlinNoise(float seed, float[] values, Vector2 mesh_size, float scale, float strength)
     {
-        float seed = Random.Range(0.0f, 1000.0f);
         float[] new_values = new float[values.Length];
         for (int i = 0; i < values.Length; i++)
             new_values[i] = values[i];
@@ -103,8 +106,9 @@ public static class HeightMap
                 else
                 {
                     Vector2 coord = new Vector2(x, y);
+                    coord.x += seed; coord.y += seed;
                     Vector2 scaled_coord = new Vector2(coord.x / (mesh_size.x), (coord.y * 2) / (mesh_size.y * 2));
-                    new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1;
+                    new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise((scaled_coord.x * scale), (scaled_coord.y * scale) *1);
                     //if(x== 5&& y == 5)
                     //Debug.Log(new_values[(int)(y * mesh_size.x) + x] +" plus "+ strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1);
                 }
@@ -114,14 +118,6 @@ public static class HeightMap
     }
     #endregion
     #region COMPLEMENTARY NOISES
-    public static float ApplyMagnitudeFilter(float current_value, float strength, float invert_ratio)
-    {
-        float og = current_value;
-        strength = invert_ratio * strength;
-
-        if (current_value < strength)
-            current_value = (strength + (current_value - strength) * -1);
-        return current_value;
-    }
+    
     #endregion
 }

@@ -129,7 +129,7 @@ public class Terrain : MonoBehaviour
 
         yield break;
     }
-    void DrawTriangles(float[] values)
+    public void DrawTriangles()
     {
         for (int y = 0; y < mesh_size.y; y++)
             for (int x = 0; x < mesh_size.x; x++)
@@ -144,7 +144,6 @@ public class Terrain : MonoBehaviour
                 }
             }
 
-
         mesh_deforming.vertices = disp_vert;
         mesh_deforming.RecalculateNormals();
         mesh_collider.sharedMesh = mesh_deforming;
@@ -155,9 +154,10 @@ public class Terrain : MonoBehaviour
     {
         //Reset
         for (int i = 0; i < triangles.Length; i++)
-            triangles[i].value = 1;
+            triangles[i].value = 10;
+
     }
-    public IEnumerator DeformPerlin(float perlin_passes)
+    public IEnumerator DeformPerlin(float seed, float perlin_passes)
     {
         //Variables that affect the whole process. These variables should remain static for the most
         float scale = Random.Range(1.0f, 1.0f);
@@ -168,7 +168,7 @@ public class Terrain : MonoBehaviour
         //It will be read to draw the triangles to the screen again
         float[] triangle_values = new float[triangles.Length];
         for (int i = 0; i < triangles.Length; i++)
-            triangle_values[i] = triangles[i].value;
+            triangle_values[i] = (float)triangles[i].value;
 
         Debug.Log("Generated new terrain with passes of: " + perlin_passes + ". And scale of: " + scale);
 
@@ -176,80 +176,26 @@ public class Terrain : MonoBehaviour
         {
             scale = scale / 2;
             float k = (float)i;
-            triangle_values = HeightMap.ApplyPerlinNoise(triangle_values, mesh_size, (float)scale / (k), 1 / (k * k * k));
+            triangle_values = HeightMap.ApplyPerlinNoise(seed, triangle_values, mesh_size, (float)scale / (k), 1 / (k * k * k));
             //Debug.Log("Scale: " + scale+" k: "+k+ " scale result: " + (float)scale / (k) + " strength: " + 1 / (k * k * k));
         }
 
         //Apply array to the triangles themselves
+        Debug.Log(triangles[25].value);
         for (int i = 0; i < triangles.Length; i++)
             triangles[i].value = triangle_values[i];
+        Debug.Log(triangles[25].value);
 
-        //Draw it to the screen
-        DrawTriangles(triangle_values);
-        //yield break;
+        Debug.Log("AAAAAAAAAAAAA");
         Debug.Log("Applied perlin noise");
-
-        DrawTriangles(triangle_values);
-        yield break;
-        for (int iteration = 1; iteration <= 1; iteration++)
-        {
-            triangle_values = HeightMap.ApplyVoronoiNoise(triangle_values, mesh_size, Random.Range(0.002f, 0.2f), 100f);
-            float perlin_seed = Random.Range(0.0f, 1000.0f);
-            for (int y = 0; y < mesh_size.y; y++)
-            {
-                yield return null;
-                for (int x = 0; x < mesh_size.x; x++)
-                {
-                    if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
-                    {
-                    }
-                    else
-                    {
-                        int i = (int)(y * mesh_size.x) + x;
-                        triangles[i].value += triangle_values[i];
-                        SetTriangle(triangles[i], Vector3.up * triangles[i].value, true);
-                    }
-                }
-            }
-        }
-
-        Debug.Log("Applied voronoi noise");
-        for (int r = 0; r < 0; r++)
-            for (int y = 0; y < mesh_size.y; y++)
-            {
-                yield return null;
-                for (int x = 0; x < mesh_size.x; x++)
-                {
-                    if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
-                    {
-                    }
-                    else
-                    {
-                        int index = (int)(y * mesh_size.x) + x;
-                        triangle_values[index] = HeightMap.ApplyMagnitudeFilter(triangle_values[index], 1, 0.7f);
-                    }
-
-                }
-            }
-
-        Debug.Log("Applied magnitude filter");
-
-
-        DrawTriangles(triangle_values);
-
-        yield return null;
-
-        Debug.Log("Went through " + triangles.Length + " triangles");
-
-
         yield break;
     }
-    public IEnumerator DeformVoronoi(float scale)
+    public IEnumerator DeformVoronoi(int seed,float scale,float point_range)
     {
         //Just to make outside use easier
         //Make it at least 10
         scale /= 10;
-        
+
         //All the heights of the triangles will bew stored in this array
         //It will be read to draw the triangles to the screen again
         float[] triangle_values = new float[triangles.Length];
@@ -259,7 +205,7 @@ public class Terrain : MonoBehaviour
         Debug.Log("Generated new terrain with scale of: " + scale);
 
         //for (int iteration = 1; iteration <= 1; iteration++) {
-        triangle_values = HeightMap.ApplyVoronoiNoise(triangle_values, mesh_size, scale, 250f);
+        triangle_values = HeightMap.ApplyVoronoiNoise(seed,triangle_values, mesh_size, scale, point_range);
         for (int y = 0; y < mesh_size.y; y++)
         {
             yield return null;
@@ -276,22 +222,18 @@ public class Terrain : MonoBehaviour
                 }
             }
         }
-        //Draw it to the screen
-        DrawTriangles(triangle_values);
-        //yield break;
-        Debug.Log("Applied");
-
-        DrawTriangles(triangle_values);
+        //Apply array to the triangles themselves
+        Debug.Log(triangles[25].value);
+        for (int i = 0; i < triangles.Length; i++)
+            triangles[i].value = triangle_values[i];
+        Debug.Log(triangles[25].value);
+        Debug.Log("AAAAAAAAAAAAA");
+        Debug.Log("Applied voronoi noise");
         yield break;
     }
     public IEnumerator ClampHeight(float min, float max)
     {
         GetMinMaxHeight();
-
-        //This function needs the min height of the terrain to work
-        //It could be improved with the min Y as a parameter ?
-        if (minmax_Y.x == 0)
-            GetMinMaxHeight();
 
         Triangle current_triangle;
         for (int y = 0; y < mesh_size.y; y++)
@@ -317,7 +259,41 @@ public class Terrain : MonoBehaviour
             }
         }
         minmax_Y = new Vector2(min, max);
+        Debug.Log("Clamped Height.");
         yield break;
+    }
+    #endregion
+    #region Debug
+    public string DebugTriangleValues()
+    {
+        float[] arr = new float[triangles.Length];
+        for (int i = 0; i < triangles.Length; i++)
+            arr[i] = triangles[i].value;
+
+
+        return ReadArrayInt(arr, (int)mesh_size.x, (int)mesh_size.y);
+    }
+    string ReadArrayInt(float[] val, int y_size, int x_size)
+    {
+        string log = "";
+        if (val == null)
+            log += ("NULL INT ARRAY");
+        else
+        {
+            for (int y = 0; y < y_size; y++)
+            {
+                for (int x = 0; x < x_size; x++)
+                {
+                    log += Mathf.RoundToInt(val[y*x+x]);
+                }
+                log += "\n";
+
+            }
+            log += "\n";
+        }
+
+        log += "\n";
+        return log;
     }
     #endregion
     #region Internal functions
