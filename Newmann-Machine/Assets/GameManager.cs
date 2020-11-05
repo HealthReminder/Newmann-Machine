@@ -31,21 +31,23 @@ public class GameManager : MonoBehaviour
     {
         while (true) {
             //ERROR SOMETHIGN MAKES IT NOT RANDOM
-            float seed = Random.Range(0, 999999);
-            Random.InitState((int)seed);
+            int seed_perlin = Random.Range(0, 99999);
+            int seed_voronoi = Random.Range(0, 99999);
+
+
             terrain.Reset();
             GeneratePlanetoid();
             //Height range is decided by the strength of gravity in the planet
             //Passes make the planet rougher 
             //Debug.Log("<color=yellow> Offset grid output: </color>\n " + terrain.DebugTriangleValues());
-            yield return StartCoroutine(terrain.DeformPerlin(seed,5.0f));
+            ;yield return StartCoroutine(terrain.DeformPerlin(seed_perlin,5.0f));
             terrain.DrawTriangles();
             //Debug.Log("<color=orange> Offset grid output: </color>\n " + terrain.DebugTriangleValues());
 
             //Scale is how scatterred the dunes are. Lower decimal values mean further away dunes. Bigger numbers means EXPONENTIALLY more clustered dunes 0.1f -> large, 0.2f -> medium, 0.5f -> small, 1.0f -> tiny.
             //Point range is how much the dunes spread, how much their arch reaches.
-            //yield return StartCoroutine(terrain.DeformVoronoi((int)seed,0.2f, 25f));
-            //terrain.DrawTriangles();
+            yield return StartCoroutine(terrain.DeformVoronoi(seed_voronoi, 0.5f, 25f));
+            terrain.DrawTriangles();
 
             yield return StartCoroutine(terrain.ClampHeight(0, 40));
             terrain.DrawTriangles();

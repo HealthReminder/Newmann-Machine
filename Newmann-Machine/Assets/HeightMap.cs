@@ -20,21 +20,21 @@ public static class HeightMap
     }
     */
     #region BASE NOISES
+
     public static float[] ApplyVoronoiNoise(int seed, float[] values, Vector2 size, float scale, float point_range)
     {
-        //Set point offset according to seed
-        float offset_x = Random.Range(0, point_range / 2);
-        float offset_y = Random.Range(0, point_range / 2);
+        Random.InitState(seed);
 
+        bool is_smooth = true;
         //Variables below should not change often
-        float radius = 250f;
+        float max_radius = 20f;
 
         float[] result = new float[values.Length];
         for (int i = 0; i < values.Length; i++)
             result[i] = values[i];
 
 
-        Debug.Log("Applying voronoi of scale: " + scale + " radius: " + radius + " with point range of: " + point_range);
+        Debug.Log("Applying voronoi of scale: " + scale + " radius: " + max_radius + " with point range of: " + point_range);
         //Point equal distribution
         List<Vector2> points = new List<Vector2>();
         int frequency = (int)(1 / scale)+1;
@@ -76,7 +76,13 @@ public static class HeightMap
                     }
 
                     //Get the value based on the distance and the radius
-                    float value = 1 - Mathf.InverseLerp(0, radius, distance_to_closest);
+                    float value;
+                    if(is_smooth)
+                        value = 1 - Mathf.InverseLerp(0, max_radius, distance_to_closest);
+                    else
+                        value = 1 - Mathf.SmoothStep(0, max_radius, distance_to_closest);
+
+
 
                     //if( value <= 0)
                     //This is a low land value
@@ -89,7 +95,7 @@ public static class HeightMap
         }
         return result;
     }
-    public static float[] ApplyPerlinNoise(float seed, float[] values, Vector2 mesh_size, float scale, float strength)
+    public static float[] ApplyPerlinNoise(int seed, float[] values, Vector2 mesh_size, float scale, float strength)
     {
         float[] new_values = new float[values.Length];
         for (int i = 0; i < values.Length; i++)
@@ -106,9 +112,8 @@ public static class HeightMap
                 else
                 {
                     Vector2 coord = new Vector2(x, y);
-                    coord.x += seed; coord.y += seed;
                     Vector2 scaled_coord = new Vector2(coord.x / (mesh_size.x), (coord.y * 2) / (mesh_size.y * 2));
-                    new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise((scaled_coord.x * scale), (scaled_coord.y * scale) *1);
+                    new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise((scaled_coord.x * scale)+seed, (scaled_coord.y * scale) + seed);
                     //if(x== 5&& y == 5)
                     //Debug.Log(new_values[(int)(y * mesh_size.x) + x] +" plus "+ strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1);
                 }
