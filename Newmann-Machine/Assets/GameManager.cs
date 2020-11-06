@@ -40,16 +40,21 @@ public class GameManager : MonoBehaviour
             //Height range is decided by the strength of gravity in the planet
             //Passes make the planet rougher 
             //Debug.Log("<color=yellow> Offset grid output: </color>\n " + terrain.DebugTriangleValues());
-            ;yield return StartCoroutine(terrain.DeformPerlin(seed_perlin,5.0f));
-            terrain.DrawTriangles();
+            //yield return StartCoroutine(terrain.DeformPerlin(seed_perlin,5.0f));
+            //terrain.DrawTriangles();
             //Debug.Log("<color=orange> Offset grid output: </color>\n " + terrain.DebugTriangleValues());
 
-            //Scale is how scatterred the dunes are. Lower decimal values mean further away dunes. Bigger numbers means EXPONENTIALLY more clustered dunes 0.1f -> large, 0.2f -> medium, 0.5f -> small, 1.0f -> tiny.
-            //Point range is how much the dunes spread, how much their arch reaches.
-            yield return StartCoroutine(terrain.DeformVoronoi(seed_voronoi, 0.5f, 25f));
+            //Point range is how much variance in its position a point can have         1 = tight grid like epicenters   20   25 = irregular dunes       50 = bubbly islands      
+            yield return StartCoroutine(terrain.DeformVoronoi(seed_voronoi, 0.5f, 20f));
+            terrain.DrawTriangles();
+            yield return new WaitForSeconds(1.0f);
+
+            //Before applying filters make sure the terrain is normalized
+
+            yield return StartCoroutine(terrain.FilterArch());
             terrain.DrawTriangles();
 
-            yield return StartCoroutine(terrain.ClampHeight(0, 40));
+            yield return StartCoroutine(terrain.ClampHeight(0, 25f));
             terrain.DrawTriangles();
 
             //APPEARANCE
@@ -60,7 +65,7 @@ public class GameManager : MonoBehaviour
             terrain.DrawTriangles();
             //Does not work as intended
             //yield return StartCoroutine(terrain.ColorMajority());
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(3.0f);
             yield return null;
 
         }

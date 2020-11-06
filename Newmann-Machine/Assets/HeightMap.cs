@@ -37,7 +37,7 @@ public static class HeightMap
         Debug.Log("Applying voronoi of scale: " + scale + " radius: " + max_radius + " with point range of: " + point_range);
         //Point equal distribution
         List<Vector2> points = new List<Vector2>();
-        int frequency = (int)(1 / scale)+1;
+        int frequency = (int)(1 / scale) + 1;
         //It generates one third more points than neeeded so they can me shifted around
         for (int y = 0; y < size.y * 2; y++)
         {
@@ -48,7 +48,7 @@ public static class HeightMap
                     {
                         Vector2 p = new Vector2(
                             x - 2 + Random.Range(point_range / 2, point_range),
-                            y / 2 - 2 + Random.Range(point_range / 2, point_range));
+                            y / 2 - 2 + Random.Range(point_range / 4, point_range/2)) ;
                         points.Add(p);
                     }
                 }
@@ -77,7 +77,7 @@ public static class HeightMap
 
                     //Get the value based on the distance and the radius
                     float value;
-                    if(is_smooth)
+                    if (is_smooth)
                         value = 1 - Mathf.InverseLerp(0, max_radius, distance_to_closest);
                     else
                         value = 1 - Mathf.SmoothStep(0, max_radius, distance_to_closest);
@@ -113,9 +113,7 @@ public static class HeightMap
                 {
                     Vector2 coord = new Vector2(x, y);
                     Vector2 scaled_coord = new Vector2(coord.x / (mesh_size.x), (coord.y * 2) / (mesh_size.y * 2));
-                    new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise((scaled_coord.x * scale)+seed, (scaled_coord.y * scale) + seed);
-                    //if(x== 5&& y == 5)
-                    //Debug.Log(new_values[(int)(y * mesh_size.x) + x] +" plus "+ strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1);
+                    new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise((scaled_coord.x * scale) + seed, (scaled_coord.y * scale) + seed);
                 }
             }
         }
@@ -123,6 +121,36 @@ public static class HeightMap
     }
     #endregion
     #region COMPLEMENTARY NOISES
-    
+    public static float[] ApplyBubbleFilter(float[] values, Vector2 mesh_size)
+    {
+        //This filter affects the existing normalized values of the mesh triangle array
+        //
+        float[] new_values = new float[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            new_values[i] = values[i];
+
+        for (int y = 0; y < mesh_size.y; y++)
+        {
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                {
+                }
+                else
+                {
+                    float old_value = new_values[(int)(y * mesh_size.x) + x];
+                    if (old_value > 1)
+                        Debug.LogWarning("Filters should only be applied to normalized values.");
+                    float new_value;
+                    new_value = Mathf.Sqrt(old_value);
+
+                    new_values[(int)(y * mesh_size.x) + x] += new_value;
+                    //if(x== 5&& y == 5)
+                    //Debug.Log(new_values[(int)(y * mesh_size.x) + x] +" plus "+ strength * Mathf.PerlinNoise(seed + (scaled_coord.x * scale), seed + scaled_coord.y * scale) * 1);
+                }
+            }
+        }
+        return new_values;
+    }
     #endregion
 }

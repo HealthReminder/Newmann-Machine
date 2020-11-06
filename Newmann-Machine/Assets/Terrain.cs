@@ -150,7 +150,7 @@ public class Terrain : MonoBehaviour
     }
     #endregion
     #region Possible deformations
-    public void Reset ()
+    public void Reset()
     {
         //Reset
         for (int i = 0; i < triangles.Length; i++)
@@ -187,7 +187,7 @@ public class Terrain : MonoBehaviour
 
         yield break;
     }
-    public IEnumerator DeformVoronoi(int seed,float scale,float point_range)
+    public IEnumerator DeformVoronoi(int seed, float scale, float point_range)
     {
         //Just to make outside use easier
         //Make it at least 10
@@ -201,10 +201,7 @@ public class Terrain : MonoBehaviour
 
         Debug.Log("Generated new terrain with scale of: " + scale);
 
-
         triangle_values = HeightMap.ApplyVoronoiNoise(seed, triangle_values, mesh_size, scale, point_range);
-
-
 
         //Apply array to the triangles themselves
         for (int i = 0; i < triangles.Length; i++)
@@ -213,6 +210,32 @@ public class Terrain : MonoBehaviour
         Debug.Log("Applied voronoi noise");
         yield break;
     }
+    public IEnumerator FilterArch()
+    {
+        Vector2 minmax = new Vector2(999, -999);
+        for (int i = 0; i < triangles.Length; i++)
+        {
+            if (triangles[i].value < minmax.x)
+                minmax.x = triangles[i].value;
+            if (triangles[i].value > minmax.y)
+                minmax.y = triangles[i].value;
+        }
+        //All the heights of the triangles will bew stored in this array
+        //It will be read to draw the triangles to the screen again
+        float[] triangle_values = new float[triangles.Length];
+        for (int i = 0; i < triangles.Length; i++)
+            triangle_values[i] = Mathf.InverseLerp(minmax.x, minmax.y, triangles[i].value);
+
+        triangle_values = HeightMap.ApplyBubbleFilter(triangle_values, mesh_size);
+
+        //Apply array to the triangles themselves
+        for (int i = 0; i < triangles.Length; i++)
+            triangles[i].value = triangle_values[i];
+
+        Debug.Log("Applied Arch filter");
+        yield break;
+    }
+
 
     public IEnumerator ClampHeight(float min, float max)
     {
@@ -267,7 +290,7 @@ public class Terrain : MonoBehaviour
             {
                 for (int x = 0; x < x_size; x++)
                 {
-                    log += Mathf.RoundToInt(val[y*x+x]);
+                    log += Mathf.RoundToInt(val[y * x + x]);
                 }
                 log += "\n";
 
