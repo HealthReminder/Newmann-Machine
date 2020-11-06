@@ -157,7 +157,7 @@ public class Terrain : MonoBehaviour
             triangles[i].value = 1;
 
     }
-    public IEnumerator DeformPerlin(int seed_perlin, float perlin_passes)
+    public IEnumerator DeformPerlin(int seed_perlin, float perlin_passes, float strength)
     {
         //Variables that affect the whole process. These variables should remain static for the most
         float scale = Random.Range(1.0f, 1.0f);
@@ -177,7 +177,7 @@ public class Terrain : MonoBehaviour
         {
             scale = scale / 2;
             float k = (float)i;
-            triangle_values = HeightMap.ApplyPerlinNoise(seed_perlin, triangle_values, mesh_size, (float)scale / (k), 1 / (k * k * k));
+            triangle_values = HeightMap.ApplyPerlinNoise(seed_perlin, triangle_values, mesh_size, (float)scale / (k), strength / (k * k * k));
             //Debug.Log("Scale: " + scale+" k: "+k+ " scale result: " + (float)scale / (k) + " strength: " + 1 / (k * k * k));
         }
 
@@ -187,7 +187,7 @@ public class Terrain : MonoBehaviour
 
         yield break;
     }
-    public IEnumerator DeformVoronoi(int seed, float scale, float point_range)
+    public IEnumerator DeformVoronoi(int seed, float scale, float point_range, float strength)
     {
         //Just to make outside use easier
         //Make it at least 10
@@ -201,7 +201,7 @@ public class Terrain : MonoBehaviour
 
         Debug.Log("Generated new terrain with scale of: " + scale);
 
-        triangle_values = HeightMap.ApplyVoronoiNoise(seed, triangle_values, mesh_size, scale, point_range);
+        triangle_values = HeightMap.ApplyVoronoiNoise(seed, triangle_values, mesh_size, scale, point_range, strength);
 
         //Apply array to the triangles themselves
         for (int i = 0; i < triangles.Length; i++)

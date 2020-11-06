@@ -21,7 +21,7 @@ public static class HeightMap
     */
     #region BASE NOISES
 
-    public static float[] ApplyVoronoiNoise(int seed, float[] values, Vector2 size, float scale, float point_range)
+    public static float[] ApplyVoronoiNoise(int seed, float[] values, Vector2 size, float scale, float point_range, float strength)
     {
         Random.InitState(seed);
 
@@ -88,7 +88,7 @@ public static class HeightMap
                     //This is a low land value
                     //Could be used for interesting exotic planets
 
-                    result[i] += (value);
+                    result[i] += (value* strength);
                 }
 
             }
