@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MeshDeformation.unity
+    path: Assets/Scenes/MeshDeformation.unity
     guid: 7b29410814175554389b1c0659257a02
   m_configObjects: {}
