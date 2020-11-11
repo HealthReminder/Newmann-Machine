@@ -187,6 +187,36 @@ public class Terrain : MonoBehaviour
 
         yield break;
     }
+    public IEnumerator DeformPixelate(int seed_perlin, float perlin_passes, float strength)
+    {
+        //Variables that affect the whole process. These variables should remain static for the most
+        float scale = Random.Range(1.0f, 1.0f);
+        //Reset
+        //for (int i = 0; i < triangles.Length; i++)
+        //triangles[i].value = 0;
+        //All the heights of the triangles will bew stored in this array
+        //It will be read to draw the triangles to the screen again
+        float[] triangle_values = new float[triangles.Length];
+        for (int i = 0; i < triangles.Length; i++)
+            triangle_values[i] = 1;
+
+        Debug.Log("Generated new terrain with passes of: " + perlin_passes + ". And scale of: " + scale);
+
+
+        for (int i = 1; i <= perlin_passes; i++)
+        {
+            scale = scale / 2;
+            float k = (float)i;
+            triangle_values = HeightMap.ApplyPerlinNoise(seed_perlin, triangle_values, mesh_size, (float)scale / (k), strength / (k * k * k));
+            //Debug.Log("Scale: " + scale+" k: "+k+ " scale result: " + (float)scale / (k) + " strength: " + 1 / (k * k * k));
+        }
+
+        //Apply array to the triangles themselves
+        for (int i = 0; i < triangles.Length; i++)
+            triangles[i].value *= triangle_values[i];
+
+        yield break;
+    }
     public IEnumerator DeformVoronoi(int seed, float scale, float point_range, float strength)
     {
         //Just to make outside use easier

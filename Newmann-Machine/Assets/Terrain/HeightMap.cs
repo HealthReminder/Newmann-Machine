@@ -142,22 +142,44 @@ public static class HeightMap
         //For each side on X axis
         for (int y = 0; y < mesh_size.y; y++)
             for (int x = 0; x < size; x++)
+            {
+                //new_values[(int)(y * mesh_size.x) + x] *= Mathf.InverseLerp(0.0f, size, x);
                 new_values[(int)(y * mesh_size.x) + x] *= Mathf.Sqrt(Mathf.InverseLerp(0.0f, size, x));
+                if (x == 0 || x == mesh_size.x || y == 0 || y == mesh_size.y)
+                    new_values[(int)(y * mesh_size.x) + x] = 0;
+            }
 
-       int padding_start = ((int)mesh_size.x - size)-1;
-       for (int y = 0; y < mesh_size.y; y++)
+        int padding_start = ((int)mesh_size.x - size)-1;
+        for (int y = 0; y < mesh_size.y; y++)
             for (int x = padding_start; x < mesh_size.x; x++)
+            {
+                //new_values[(int)(y * mesh_size.x) + x] *= Mathf.InverseLerp(size, 0.0f, x - padding_start);
                 new_values[(int)(y * mesh_size.x) + x] *= Mathf.Sqrt(Mathf.InverseLerp(size, 0.0f, x - padding_start));
+                if (x == 0 || x == mesh_size.x || y == 0 || y == mesh_size.y)
+                    new_values[(int)(y * mesh_size.x) + x] = 0;
+            }
 
         //For each side on Y axis
         for (int y = 0; y < size; y++)
-             for (int x = 0; x < mesh_size.x; x++)
-               new_values[(int)(y * mesh_size.x) + x] *= Mathf.Sqrt(Mathf.InverseLerp(0.0f, size, y));
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                //new_values[(int)(y * mesh_size.x) + x] *= Mathf.InverseLerp(0.0f, size, y);
+                new_values[(int)(y * mesh_size.x) + x] *= Mathf.Sqrt(Mathf.InverseLerp(0.0f, size, y));
+                if (x == 0 || x == mesh_size.x || y == 0 || y == mesh_size.y)
+                    new_values[(int)(y * mesh_size.x) + x] = 0;
+            }
+        
 
         padding_start = ((int)mesh_size.y - size)-1;
         for (int y = padding_start; y < mesh_size.y; y++)
             for (int x = 0; x < mesh_size.x; x++)
-               new_values[(int)(y * mesh_size.x) + x] *= Mathf.Sqrt(Mathf.InverseLerp(size, 0.0f, y - padding_start));
+            {
+                //new_values[(int)(y * mesh_size.x) + x] *= Mathf.InverseLerp(size, 0.0f, y - padding_start);
+                new_values[(int)(y * mesh_size.x) + x] *= Mathf.Sqrt(Mathf.InverseLerp(size, 0.0f, y - padding_start));
+                if (x == 0 || x == mesh_size.x || y == 0 || y == mesh_size.y)
+                    new_values[(int)(y * mesh_size.x) + x] = 0;
+            }
+        //new_values[(int)(y * mesh_size.x) + x] *= Mathf.Sqrt(Mathf.InverseLerp(size, 0.0f, y - padding_start));
 
 
 

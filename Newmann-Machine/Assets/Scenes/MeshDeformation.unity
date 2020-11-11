@@ -308,12 +308,12 @@ GameObject:
   - component: {fileID: 189300339}
   - component: {fileID: 189300338}
   m_Layer: 0
-  m_Name: Water
+  m_Name: WaterAppearance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &189300338
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -382,11 +382,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189300337}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -30, z: 0}
-  m_LocalScale: {x: 300, y: 4.79, z: 300}
+  m_LocalPosition: {x: 0, y: -0.515, z: 0}
+  m_LocalScale: {x: 1, y: 2.0304406, z: 1}
   m_Children: []
-  m_Father: {fileID: 1758670035}
-  m_RootOrder: 3
+  m_Father: {fileID: 1526648489}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &234402572
 GameObject:
@@ -1452,6 +1452,37 @@ Transform:
   m_Father: {fileID: 1758670035}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1526648488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1526648489}
+  m_Layer: 0
+  m_Name: Water
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1526648489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526648488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -20, z: 0}
+  m_LocalScale: {x: 300, y: 10, z: 300}
+  m_Children:
+  - {fileID: 189300341}
+  m_Father: {fileID: 1758670035}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532434885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,7 +1785,7 @@ Transform:
   - {fileID: 1275972881}
   - {fileID: 1063590673}
   - {fileID: 1438801599}
-  - {fileID: 189300341}
+  - {fileID: 1526648489}
   - {fileID: 848928006}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1788,7 +1819,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b8c2ac30162204d89214d04dc65600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_once: 1
   terrain: {fileID: 7772811172939071279}
+  water_transform: {fileID: 1526648489}
+  probability_curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.3
+      outSlope: 3.3
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.3750007
+      outSlope: -3.3750007
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16666663
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   possible_terrain_colors:
   - serializedVersion: 2
     key0: {r: 0.23552026, g: 0.23099858, b: 0.2735849, a: 1}
@@ -1902,6 +1968,62 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
+  - serializedVersion: 2
+    key0: {r: 0.208674, g: 0.23584908, b: 0.13906196, a: 1}
+    key1: {r: 0.3929995, g: 0.5943396, b: 0.28315237, a: 1}
+    key2: {r: 0.71960443, g: 0.8773585, b: 0.6166341, a: 0}
+    key3: {r: 0.7146072, g: 0.98160774, b: 0.8264718, a: 0}
+    key4: {r: 0.7137255, g: 1, b: 0.8634926, a: 0}
+    key5: {r: 0.42745098, g: 0.79209423, b: 0.8784314, a: 0}
+    key6: {r: 0.44980422, g: 0.54254335, b: 0.7169812, a: 0}
+    key7: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0}
+    ctime0: 193
+    ctime1: 3855
+    ctime2: 7517
+    ctime3: 12143
+    ctime4: 15227
+    ctime5: 23323
+    ctime6: 43947
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 2
+  - serializedVersion: 2
+    key0: {r: 0.4528302, g: 0.19010323, b: 0.19530214, a: 1}
+    key1: {r: 0.9254902, g: 0.8640462, b: 0.5019608, a: 1}
+    key2: {r: 1, g: 0.76604927, b: 0.3915094, a: 0}
+    key3: {r: 0.9528302, g: 0.5338041, b: 0.31011927, a: 0}
+    key4: {r: 0.8773585, g: 0.26072446, b: 0.2668877, a: 0}
+    key5: {r: 0.98039216, g: 0.6768049, b: 0.5411765, a: 0}
+    key6: {r: 0.9811321, g: 0.88975275, b: 0.54147387, a: 0}
+    key7: {r: 1, g: 1, b: 1, a: 0}
+    ctime0: 193
+    ctime1: 8288
+    ctime2: 14264
+    ctime3: 26021
+    ctime4: 52814
+    ctime5: 65535
+    ctime6: 65535
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
   current_planetoid:
     terrain_colors:
       serializedVersion: 2
@@ -1934,7 +2056,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
   routine_time: 0
   perlin_strength: 0
-  voronoi_strength: 0
+  voronoi_strength: 0.86
 --- !u!4 &1760226320
 Transform:
   m_ObjectHideFlags: 0
@@ -2095,13 +2217,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845115442}
-  m_LocalRotation: {x: 0.23911798, y: 0.36964375, z: -0.099045925, w: 0.892399}
-  m_LocalPosition: {x: -131, y: 193.3, z: -126.4}
+  m_LocalRotation: {x: 0.22414392, y: 0.48296294, z: -0.12940955, w: 0.8365163}
+  m_LocalPosition: {x: -220, y: 218, z: -80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 30.000002, y: 45.000004, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.000002, y: 60, z: 0}
 --- !u!1 &1969012241
 GameObject:
   m_ObjectHideFlags: 0
