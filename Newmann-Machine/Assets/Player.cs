@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator SpawnRoutine(Vector3 terrain_position)
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         //In the future the player must be spawned using an initial pod
         spawn_pod.position = terrain_position + new Vector3(0, 100, 0);
         RaycastHit hit;

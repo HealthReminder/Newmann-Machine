@@ -41,7 +41,7 @@ public class GenerationTester : MonoBehaviour
         //voronoi_strength = 0.0f + routine_time;
 
         perlin_strength = Random.Range(0.0f, 1.0f);
-        voronoi_strength = Random.Range(0.0f, 1.0f);
+        voronoi_strength = Random.Range(0.0f, 0.3f);
 
         perlin_strength = probability_curve.Evaluate(perlin_strength);
         voronoi_strength = probability_curve.Evaluate(voronoi_strength);
@@ -73,28 +73,38 @@ public class GenerationTester : MonoBehaviour
             //terrain.DrawTriangles();
 
             //Before applying filters make sure the terrain is normalized
+            //yield return StartCoroutine(terrain.ClampHeight(0, 50f));
 
             yield return StartCoroutine(terrain.FilterArch());
-            //terrain.DrawTriangles();
-            yield return StartCoroutine(terrain.ClampHeight(0, 50f));
+            //yield return terrain.DrawTriangles();
 
-            //Finally smooth out bounds to make it prettier
+            //yield return terrain.DrawTriangles();
+
+             //Finally smooth out bounds to make it prettier
             //Can be modified to simulate an island-like generation
             //If has water make it an island
             yield return StartCoroutine(terrain.FilterSquarePadding(15));
 
+            yield return StartCoroutine(terrain.FilterPixelate(4));
 
-            terrain.DrawTriangles();
+            //terrain.DrawTriangles();
+            yield return StartCoroutine(terrain.ClampHeight(0, 50f));
+
+
+
+
+            yield return terrain.DrawTriangles();
+
+
             //TERRAIN GENERATION END
 
             //TERRAIN APPEARANCE
             yield return StartCoroutine(terrain.ColorHeight(current_planetoid.terrain_colors));
             //Smoothes colors
-            yield return StartCoroutine(terrain.ColorAverage());
+            //yield return StartCoroutine(terrain.ColorAverage());
             //Does not work as intended
             //yield return StartCoroutine(terrain.ColorMajority());
-            
-            terrain.DrawTriangles();
+
 
             Debug.Log(("<color=green>Run routine for perlin values of {0}. Voronoi strength of {1}.</color>", perlin_strength, voronoi_strength));
 

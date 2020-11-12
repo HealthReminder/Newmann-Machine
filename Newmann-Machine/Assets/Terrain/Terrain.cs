@@ -129,9 +129,10 @@ public class Terrain : MonoBehaviour
 
         yield break;
     }
-    public void DrawTriangles()
+    public IEnumerator DrawTriangles()
     {
         for (int y = 0; y < mesh_size.y; y++)
+        {
             for (int x = 0; x < mesh_size.x; x++)
             {
                 if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
@@ -142,7 +143,11 @@ public class Terrain : MonoBehaviour
                     int index = (int)(y * mesh_size.x) + x;
                     SetTriangle(triangles[index], (Vector3.up * triangles[index].value), true);
                 }
+
             }
+            yield return null;
+
+        }
 
         mesh_deforming.vertices = disp_vert;
         mesh_deforming.RecalculateNormals();
@@ -187,33 +192,24 @@ public class Terrain : MonoBehaviour
 
         yield break;
     }
-    public IEnumerator DeformPixelate(int seed_perlin, float perlin_passes, float strength)
+    public IEnumerator FilterPixelate(int size)
     {
-        //Variables that affect the whole process. These variables should remain static for the most
-        float scale = Random.Range(1.0f, 1.0f);
-        //Reset
-        //for (int i = 0; i < triangles.Length; i++)
-        //triangles[i].value = 0;
         //All the heights of the triangles will bew stored in this array
         //It will be read to draw the triangles to the screen again
         float[] triangle_values = new float[triangles.Length];
         for (int i = 0; i < triangles.Length; i++)
-            triangle_values[i] = 1;
+            triangle_values[i] = triangles[i].value;
 
-        Debug.Log("Generated new terrain with passes of: " + perlin_passes + ". And scale of: " + scale);
+        triangle_values = HeightMap.ApplyBoxBlur(size, triangle_values, mesh_size);
+        //Debug.Log("Scale: " + scale+" k: "+k+ " scale result: " + (float)scale / (k) + " strength: " + 1 / (k * k * k));
 
-
-        for (int i = 1; i <= perlin_passes; i++)
-        {
-            scale = scale / 2;
-            float k = (float)i;
-            triangle_values = HeightMap.ApplyPerlinNoise(seed_perlin, triangle_values, mesh_size, (float)scale / (k), strength / (k * k * k));
-            //Debug.Log("Scale: " + scale+" k: "+k+ " scale result: " + (float)scale / (k) + " strength: " + 1 / (k * k * k));
-        }
 
         //Apply array to the triangles themselves
         for (int i = 0; i < triangles.Length; i++)
-            triangles[i].value *= triangle_values[i];
+        {
+            triangles[i].value = triangle_values[i];
+
+        }
 
         yield break;
     }
@@ -242,7 +238,7 @@ public class Terrain : MonoBehaviour
     }
     public IEnumerator FilterSquarePadding(int padding_size)
     {
-       
+
         //Array contains height of triangles and will be read to draw them
         float[] triangle_values = new float[triangles.Length];
         for (int i = 0; i < triangles.Length; i++)
@@ -254,7 +250,7 @@ public class Terrain : MonoBehaviour
         for (int i = 0; i < triangles.Length; i++)
             triangles[i].value *= triangle_values[i];
 
-        Debug.Log("Applied Arch filter");
+        Debug.Log("Applied Padding filter");
         yield break;
     }
     public IEnumerator FilterArch()

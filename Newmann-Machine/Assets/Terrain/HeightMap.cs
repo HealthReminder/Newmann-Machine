@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public static class HeightMap
 {
@@ -183,6 +185,120 @@ public static class HeightMap
 
 
 
+        return new_values;
+    }
+
+    public static float[] ApplyBoxBlur(int size, float[] values, Vector2 mesh_size)
+    {
+        //This filter affects the existing normalized values of the mesh triangle array
+
+        float[] new_values = new float[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            new_values[i] = values[i];
+
+        float[][] arr = new float[(int)mesh_size.x][];
+        for (int x = 0; x < mesh_size.x; x++)
+            arr[x] = new float[(int)mesh_size.y];
+
+        //This list contains the coordinates corresponding to the area of a single unit of blur defined by the size parameter
+        List<List<Vector2>> blur_cells = new List<List<Vector2>>();
+
+        //For each cell check if its the initital point of a new blur cel
+        for (int y = 0; y < mesh_size.y; y++)
+        {
+            int x_skip = 0;
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                arr[x][y] = new_values[(int)(y * mesh_size.x) + x];
+                if (x_skip == size && y % size == 0)
+                {
+                    //If these conditions match it means that this is the coordinate for a new blur cell
+                    x_skip = 0;
+                    blur_cells.Add(new List<Vector2>());
+                    for (int o = 0; o < size; o++)
+                    {
+                        for (int i = 0; i < size; i++)
+                        {
+                            Vector2 coord = new Vector2(x + i, y + o);
+                            if(coord.x >= 0 && coord.x < mesh_size.x && coord.y >= 0 && coord.y < mesh_size.y)
+                                blur_cells[blur_cells.Count - 1].Add(coord);
+                        }
+                    }
+                    
+
+                }
+                else
+                    x_skip++;
+
+            }
+        }
+        Debug.Log("Box blur quantity of blur cells is " + blur_cells.Count);
+        for (int i = 0; i < blur_cells.Count; i++)
+        {
+            float total_sum = 0;
+            for (int k = 0; k < blur_cells[i].Count; k++)
+            {
+                int x = (int)blur_cells[i][k].x;
+                int y = (int)blur_cells[i][k].y;
+                total_sum += arr[x][y];
+            }
+            float avg_value = total_sum / blur_cells[i].Count;
+            for (int k = 0; k < blur_cells[i].Count; k++)
+            {
+                int x = (int)blur_cells[i][k].x;
+                int y = (int)blur_cells[i][k].y;
+                arr[x][y] = avg_value;
+            }
+        }
+
+        //This is for debugging to check if the cells are in order
+        //for (int y = 0; y < mesh_size.y; y++)
+        //{
+            //for (int x = 0; x < mesh_size.x; x++)
+            //{
+            //    arr[x][y] = ((int)(y * mesh_size.x) + x);
+            //}
+        //}
+
+        for (int y = 0; y < mesh_size.y; y++)
+        {
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+                new_values[(int)(y * mesh_size.x) + x] = arr[x][y];
+
+            }
+        }
+
+
+        return new_values;
+
+        //Debug.Log(string.Format("Generated {0} blurred cells from mesh of size {1} by {2}", blurred_cells.Count, mesh_size.x, mesh_size.y));
+        for (int y = 0; y < mesh_size.y; y += size)
+            for (int x = 0; x < mesh_size.x; x += size) {
+                if (x == 0 || x == 1 || x >= mesh_size.x - 2 || y == 0 || y >= mesh_size.y - 1)
+                {
+                }
+
+                float total_sum = 0;
+                int total_counted = 0;
+                for (int o = y; o < y + size; o++)
+                    for (int i = x; i < x + size; i++)
+                        if (o > 0 && o < mesh_size.y && i > 0 && i < mesh_size.x)
+                        {
+                            total_sum += new_values[(int)(y * mesh_size.x) + x];
+                            total_counted++;
+                        }
+
+                float final_value = total_sum / total_counted + 1;
+                Debug.Log(string.Format("Final value of {0} for box blur from {1} to {2}, total sum of {3}, with {4} items counted.", final_value, new Vector2(x, y), new Vector2(x + size, y + size), total_sum, total_counted));
+                for (int o = y; o < y + size; o++)
+                    for (int i = x; i < x + size; i++)
+                        if (o > 0 && o < mesh_size.x && i > 0 && i < mesh_size.y)
+                            new_values[(int)(y * mesh_size.x) + x] = final_value;
+
+
+            }
+        Debug.Log("Applied box blur of size " + size);
         return new_values;
     }
     public static float[] ApplyBubbleFilter(float[] values, Vector2 mesh_size)
