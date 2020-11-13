@@ -209,13 +209,14 @@ public static class HeightMap
             int x_skip = 0;
             for (int x = 0; x < mesh_size.x; x++)
             {
+
                 arr[x][y] = new_values[(int)(y * mesh_size.x) + x];
-                if (x_skip == size && y % size == 0)
+                if (x_skip == size*2 && y % size == 0)
                 {
                     //If these conditions match it means that this is the coordinate for a new blur cell
                     x_skip = 0;
                     blur_cells.Add(new List<Vector2>());
-                    for (int o = 0; o < size; o++)
+                    for (int o = 0; o < size/2; o++)
                     {
                         for (int i = 0; i < size; i++)
                         {

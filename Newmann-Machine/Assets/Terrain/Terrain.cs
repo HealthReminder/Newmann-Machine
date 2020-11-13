@@ -50,23 +50,42 @@ public class Terrain : MonoBehaviour
         Setup();
     }
     #region Appearance
-    public IEnumerator ColorHeight(Gradient gradient)
+    public IEnumerator ColorAngle()
     {
         Color[] vertex_colors = new Color[mesh_deforming.vertices.Length];
         for (int y = 0; y < mesh_size.y; y++)
         {
-            yield return null;
+            //yield return null;
+            for (int x = 0; x < mesh_size.x; x++)
+            {
+
+            }
+        }
+        mesh_deforming.colors = vertex_colors;
+        Debug.Log("Applied angle colors");
+        yield break;
+    }
+    public IEnumerator ColorHeight(Gradient gradient, float min = 0.0f, float max = 1.0f)
+    {
+        //Color vertices according to height
+        //Values are normalized to enable a min max
+        Color[] vertex_colors = new Color[mesh_deforming.vertices.Length];
+        for (int y = 0; y < mesh_size.y; y++)
+        {
+            //yield return null;
             for (int x = 0; x < mesh_size.x; x++)
             {
                 int i = (int)(y * mesh_size.x) + x;
                 Triangle current_triangle = triangles[i];
-                float lerp = Mathf.InverseLerp(minmax_Y.x, minmax_Y.y, current_triangle.value);
+                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAA "+ min + " " + max + " " + current_triangle.value);
+                //float lerp = Mathf.InverseLerp(minmax_Y.x, minmax_Y.y, current_triangle.value);
+                float lerp = Mathf.InverseLerp(min, 1.0f, current_triangle.value);
                 vertex_colors[current_triangle.i1] = vertex_colors[current_triangle.i2] = vertex_colors[current_triangle.i3] = gradient.Evaluate(lerp);
                 mesh_deforming.colors = vertex_colors;
             }
         }
         mesh_deforming.colors = vertex_colors;
-        Debug.Log("Applied random colors");
+        Debug.Log("Applied color height.");
         yield break;
     }
     public IEnumerator ColorMajority()

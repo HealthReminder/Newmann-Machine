@@ -60,6 +60,7 @@ public class GenerationTester : MonoBehaviour
 
             //TERRAIN GENERATION
             terrain.Reset();
+            yield return StartCoroutine(terrain.ColorHeight(new Gradient()));
             GeneratePlanetoid();
             //Height range is decided by the strength of gravity in the planet
             //Passes make the planet rougher 
@@ -88,23 +89,23 @@ public class GenerationTester : MonoBehaviour
             yield return StartCoroutine(terrain.FilterPixelate(4));
 
             //terrain.DrawTriangles();
-            yield return StartCoroutine(terrain.ClampHeight(0, 50f));
 
-
-
-
-            yield return terrain.DrawTriangles();
-
+            //Clamp to normalized values to make sure colors work properly
+            yield return StartCoroutine(terrain.ClampHeight(0.0f, 1.0f));
 
             //TERRAIN GENERATION END
 
             //TERRAIN APPEARANCE
-            yield return StartCoroutine(terrain.ColorHeight(current_planetoid.terrain_colors));
+            yield return StartCoroutine(terrain.ColorHeight(current_planetoid.terrain_colors, 0.4f));
+            //yield return StartCoroutine(terrain.ColorAngle());
             //Smoothes colors
             //yield return StartCoroutine(terrain.ColorAverage());
             //Does not work as intended
             //yield return StartCoroutine(terrain.ColorMajority());
 
+
+            yield return StartCoroutine(terrain.ClampHeight(0, 50f));
+            yield return terrain.DrawTriangles();
 
             Debug.Log(("<color=green>Run routine for perlin values of {0}. Voronoi strength of {1}.</color>", perlin_strength, voronoi_strength));
 
