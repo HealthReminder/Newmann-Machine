@@ -16,6 +16,8 @@ public class GenerationTester : MonoBehaviour
     public Terrain terrain;
     public Transform water_transform;
     public AnimationCurve probability_curve;
+    public AnimationCurve leveling_curve; //Make beaches flatter and mountains steeper using an exponential function
+
     [Header("Cached info for generation")]
     public Gradient[] possible_terrain_colors;
     [Header("Planetoid Info")]
@@ -84,9 +86,9 @@ public class GenerationTester : MonoBehaviour
              //Finally smooth out bounds to make it prettier
             //Can be modified to simulate an island-like generation
             //If has water make it an island
-            yield return StartCoroutine(terrain.FilterSquarePadding(15));
+            //yield return StartCoroutine(terrain.FilterSquarePadding(15));
 
-            yield return StartCoroutine(terrain.FilterPixelate(4));
+            // yield return StartCoroutine(terrain.FilterPixelate(4));
 
             //terrain.DrawTriangles();
 
@@ -102,6 +104,7 @@ public class GenerationTester : MonoBehaviour
             //yield return StartCoroutine(terrain.ColorAverage());
             //Does not work as intended
             //yield return StartCoroutine(terrain.ColorMajority());
+            yield return StartCoroutine(terrain.ApplyCurve(leveling_curve));
 
 
             yield return StartCoroutine(terrain.ClampHeight(0, 50f));

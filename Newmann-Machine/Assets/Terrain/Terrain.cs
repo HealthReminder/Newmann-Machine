@@ -181,6 +181,27 @@ public class Terrain : MonoBehaviour
             triangles[i].value = 1;
 
     }
+    public IEnumerator ApplyCurve(AnimationCurve curve)
+    {
+        if (curve == null)
+            Debug.LogError("Cannot apply null curve.");
+
+        //New cache of old values to faster iteration
+        int len = triangles.Length;
+        float[] triangle_values = new float[len];
+        for (int i = 0; i < len; i++)
+            triangle_values[i] = triangles[i].value;
+
+        for (int i = 0; i < len; i++)
+            triangle_values[i] = curve.Evaluate(triangle_values[i]);
+
+        //Apply modified array to the existing one
+        for (int i = 0; i < len; i++)
+            triangles[i].value = triangle_values[i];
+
+
+        yield break;
+    }
     public IEnumerator DeformPerlin(int seed_perlin, float perlin_passes, float strength)
     {
         //Variables that affect the whole process. These variables should remain static for the most
@@ -196,7 +217,6 @@ public class Terrain : MonoBehaviour
 
         Debug.Log("Generated new terrain with passes of: " + perlin_passes + ". And scale of: " + scale);
 
-
         for (int i = 1; i <= perlin_passes; i++)
         {
             scale = scale / 2;
@@ -211,6 +231,7 @@ public class Terrain : MonoBehaviour
 
         yield break;
     }
+
     public IEnumerator FilterPixelate(int size)
     {
         //All the heights of the triangles will bew stored in this array

@@ -115,7 +115,8 @@ public static class HeightMap
                 {
                     Vector2 coord = new Vector2(x, y);
                     Vector2 scaled_coord = new Vector2(coord.x / (mesh_size.x), (coord.y * 2) / (mesh_size.y * 2));
-                    new_values[(int)(y * mesh_size.x) + x] += strength * Mathf.PerlinNoise((scaled_coord.x * scale) + seed, (scaled_coord.y * scale) + seed);
+                    float result  = strength * Mathf.PerlinNoise((scaled_coord.x * scale) + seed, (scaled_coord.y * scale) + seed);
+                    new_values[(int)(y * mesh_size.x) + x] += result;
                 }
             }
         }
