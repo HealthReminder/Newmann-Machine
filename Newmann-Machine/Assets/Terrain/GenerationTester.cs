@@ -42,11 +42,11 @@ public class GenerationTester : MonoBehaviour
         //perlin_strength = 1.0f - routine_time;
         //voronoi_strength = 0.0f + routine_time;
 
-        perlin_strength = Random.Range(0.0f, 1.0f);
-        voronoi_strength = Random.Range(0.0f, 0.3f);
+        perlin_strength = Random.Range(0.4f, 1.0f);
+        voronoi_strength = Random.Range(0.1f, 0.7f);
 
-        perlin_strength = probability_curve.Evaluate(perlin_strength);
-        voronoi_strength = probability_curve.Evaluate(voronoi_strength);
+        //perlin_strength = probability_curve.Evaluate(perlin_strength);
+        //voronoi_strength = probability_curve.Evaluate(voronoi_strength);
 
         routine_time += f;
     }
@@ -54,13 +54,12 @@ public class GenerationTester : MonoBehaviour
     IEnumerator SetupRoutine()
     {
         while (true) {
-            //ERROR SOMETHIGN MAKES IT NOT RANDOM
             int seed_perlin = Random.Range(0, 99999);
             int seed_voronoi = Random.Range(0, 99999);
 
 
 
-            //TERRAIN GENERATION
+            //TERRAIN GENERATION ----------------------------------------------------------------------------------
             terrain.Reset();
             yield return StartCoroutine(terrain.ColorHeight(new Gradient()));
             GeneratePlanetoid();
@@ -72,33 +71,22 @@ public class GenerationTester : MonoBehaviour
             //Debug.Log("<color=orange> Offset grid output: </color>\n " + terrain.DebugTriangleValues());
 
             //Point range is how much variance in its position a point can have         1 = tight grid like epicenters   20   25 = irregular dunes       50 = bubbly islands      
-            yield return StartCoroutine(terrain.DeformVoronoi(seed_voronoi, 0.5f, 50f, voronoi_strength));
-            //terrain.DrawTriangles();
-
-            //Before applying filters make sure the terrain is normalized
-            //yield return StartCoroutine(terrain.ClampHeight(0, 50f));
-
-            yield return StartCoroutine(terrain.FilterArch());
+            yield return StartCoroutine(terrain.DeformVoronoi(seed_voronoi, 0.5f, 75f, voronoi_strength));
+            //Finally smooth out bounds to make it look like an isolated piece of land
+            yield return StartCoroutine(terrain.FilterSquarePadding(10));
+            //Make terrain values arch like the dunes of a desert
+            //yield return StartCoroutine(terrain.FilterArch());
+            //Make it blocky
+            //yield return StartCoroutine(terrain.FilterPixelate(4));
             //yield return terrain.DrawTriangles();
 
-            //yield return terrain.DrawTriangles();
-
-             //Finally smooth out bounds to make it prettier
-            //Can be modified to simulate an island-like generation
-            //If has water make it an island
-            //yield return StartCoroutine(terrain.FilterSquarePadding(15));
-
-            // yield return StartCoroutine(terrain.FilterPixelate(4));
-
-            //terrain.DrawTriangles();
+            //COLOR CHANGES --------------------------------------------------------------------------------------
 
             //Clamp to normalized values to make sure colors work properly
             yield return StartCoroutine(terrain.ClampHeight(0.0f, 1.0f));
-
-            //TERRAIN GENERATION END
-
-            //TERRAIN APPEARANCE
+            //Color by height
             yield return StartCoroutine(terrain.ColorHeight(current_planetoid.terrain_colors, 0.4f));
+            //Color by angle
             //yield return StartCoroutine(terrain.ColorAngle());
             //Smoothes colors
             //yield return StartCoroutine(terrain.ColorAverage());
@@ -106,16 +94,19 @@ public class GenerationTester : MonoBehaviour
             //yield return StartCoroutine(terrain.ColorMajority());
             yield return StartCoroutine(terrain.ApplyCurve(leveling_curve));
 
+            //POST COLOR CHANGES --------------------------------------------------------------------------------
 
+            //Stretch terrain height between min and max values
             yield return StartCoroutine(terrain.ClampHeight(0, 50f));
+            //Draw results
             yield return terrain.DrawTriangles();
 
-            Debug.Log(("<color=green>Run routine for perlin values of {0}. Voronoi strength of {1}.</color>", perlin_strength, voronoi_strength));
+            Debug.Log(string.Format("<color=green>Run routine for perlin values of {0}. Voronoi strength of {1}.</color>", perlin_strength, voronoi_strength));
 
-            //TERRAIN APPEARANCE END
 
             yield return new WaitForSeconds(4.2f);
             yield return null;
+            //Change values for new level generation
             ChangePublicVariables(0.1f);
             if (is_once)
                 yield break;
