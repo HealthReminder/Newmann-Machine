@@ -1,0 +1,33 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public TerrainGenerator terrain_gen;
+    public ResourceManager resource_manager;
+    public Player player;
+    private void Start()
+    {
+        StartCoroutine(GameRoutine());
+    }
+    IEnumerator GameRoutine()
+    {
+        while (true)
+        {
+            yield return terrain_gen.GenerateNewTerrain();
+            yield return resource_manager.PopulateResources();
+            yield return player.SpawnRoutine(terrain_gen.transform.position);
+
+            //Game loop
+            while (true)
+            {
+                //Match loop
+                yield return null;
+
+            }
+            yield return null;
+        }
+        yield break;
+    }
+}
