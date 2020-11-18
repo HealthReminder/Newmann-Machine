@@ -53,6 +53,17 @@ public class PlayerInput : MonoBehaviour
             return;
         //Do stuff regarding play input
         //In this part
+    }
+    private void FixedUpdate()
+    {
+        if (!is_spawned)
+            return;
+        //Do calculations and automatic actions
+        //In this part
+        if (!is_input)
+            return;
+        //Do stuff regarding play input
+        //In this part
         if (placing_building)
             PlaceBuilding();
     }
@@ -72,7 +83,7 @@ public class PlayerInput : MonoBehaviour
 
             if(hit.transform.tag == "Terrain")
             {
-                building_manager.DisplayPlacement(placing_building, hit.point);
+                building_manager.DisplayPlacement(placing_building, hit.point, hit.normal);
             }
         }
 

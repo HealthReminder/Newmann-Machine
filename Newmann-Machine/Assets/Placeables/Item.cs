@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
 {
     public string item_name;
     public bool is_instantiated;
-    public Collider coll;
+    public Collider[] coll;
     public Renderer[] renderers;
     public void ChangeColors(Color new_color)
     {

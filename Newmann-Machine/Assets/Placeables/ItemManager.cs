@@ -9,10 +9,13 @@ public class ItemManager : MonoBehaviour
     #region Player Display
 
     Item item_display = null;
-    public bool DisplayPlacement(GameObject displaying_item, Vector3 pos)
+    public bool DisplayPlacement(GameObject displaying_item, Vector3 pos, Vector3 normal)
     {
+        if (!displaying_item)
+            Debug.LogError("Cannot instantiate null item.");
+
         if (!displaying_item.GetComponent<Item>())
-            Debug.LogError("Cannot instantiate object with no Placeable script.");
+            Debug.LogError("Cannot instantiate item with no Placeable script.");
 
         //Check if it was displaying something already
         if (item_display)
@@ -22,20 +25,71 @@ public class ItemManager : MonoBehaviour
             {
                 Destroy(item_display.gameObject);
                 item_display = Instantiate(displaying_item, pos, Quaternion.identity, transform).GetComponent<Item>();
+                for (int c = 0; c < item_display.coll.Length; c++)
+                    item_display.coll[c].isTrigger = true;
+
+
 
             }
 
         }
         else
+        {
             //Was not previewing any item
             item_display = Instantiate(displaying_item, pos, Quaternion.identity, transform).GetComponent<Item>();
+            for (int c = 0; c < item_display.coll.Length; c++)
+                item_display.coll[c].isTrigger = true;
+        }
 
+        //Move item and align to normal
         item_display.transform.position = pos;
+        item_display.transform.rotation  = Quaternion.FromToRotation(Vector3.up, normal);
 
-        item_display.ChangeColors(Color.red);
+        //Change colors according to validity
+        if (IsColliderIntersecting(item_display.coll))
+            item_display.ChangeColors(Color.red);
+        else
+            item_display.ChangeColors(Color.green);
+
         //Check validity
 
         return false;
     }
+    bool IsColliderIntersecting(Collider[] colls)
+    {
+        bool is_intersecting = false;
+        for (int i = 0; i < colls.Length; i++)
+        {
+            Collider cur = colls[i];
+            if (cur.GetComponent<SphereCollider>())
+            {
+                SphereCollider s_coll = cur.GetComponent<SphereCollider>();
+                if (Physics.OverlapSphere(s_coll.center, s_coll.radius ).Length > 0)
+                    is_intersecting = true;
+                Debug.Log("1");
+            }
+            else if (cur.GetComponent<BoxCollider>())
+            {
+                BoxCollider b_coll = cur.GetComponent<BoxCollider>();
+                if ((Physics.OverlapBox(b_coll.transform.position, b_coll.size/2 ,b_coll.transform.rotation).Length > 0))
+                    is_intersecting = true;
+                Debug.Log("2");
+
+            }
+            else if (cur.GetComponent<CapsuleCollider>())
+            {
+                CapsuleCollider c_coll = cur.GetComponent<CapsuleCollider>();
+                Vector3 top = new Vector3(c_coll.center.x, c_coll.center.y + c_coll.height / 2 - c_coll.radius, c_coll.center.z);
+                Vector3 bottom = new Vector3(c_coll.center.x, c_coll.center.y - c_coll.height / 2 + c_coll.radius, c_coll.center.z);
+                if ((Physics.OverlapCapsule(top,bottom,c_coll.radius ).Length > 0))
+                    is_intersecting = true;
+                Debug.Log("3");
+
+            }
+
+        }
+        return is_intersecting;
+    }
+
     #endregion
 }
