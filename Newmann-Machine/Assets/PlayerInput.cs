@@ -7,8 +7,8 @@ public class PlayerInput : MonoBehaviour
     public bool is_spawned = false;
     public bool is_input = false;
     public Transform spawn_pod;
-    public ItemManager building_manager;
-    public GameObject placing_building;
+    public ItemManager item_manager;
+    public GameObject item_placing;
     public Camera main_camera;
     public IEnumerator SpawnRoutine(Vector3 terrain_position)
     {
@@ -47,60 +47,37 @@ public class PlayerInput : MonoBehaviour
     {
         if (!is_spawned)
             return;
-        //Do calculations and automatic actions
-        //In this part
         if (!is_input)
             return;
-        //Do stuff regarding play input
-        //In this part
+        if (item_placing)
+            PlacingItem();
     }
-    private void FixedUpdate()
-    {
-        if (!is_spawned)
-            return;
-        //Do calculations and automatic actions
-        //In this part
-        if (!is_input)
-            return;
-        //Do stuff regarding play input
-        //In this part
-        if (placing_building)
-            PlaceBuilding();
-    }
-
-    void PlaceBuilding()
+    bool is_placement_valid = false;
+    void PlacingItem()
     {
 
         //Player is cancelling input on map
         if (Input.GetMouseButtonDown(1))
-            placing_building = null;
-
-        RaycastHit hit;
-        Ray ray = main_camera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
         {
-
-            if(hit.transform.tag == "Terrain")
-            {
-                building_manager.DisplayPlacement(placing_building, hit.point, hit.normal);
-            }
+            item_placing = null;
+            item_manager.ClearDisplay();
         }
 
-        //Preview bulding placement
-        if (placing_building != null)
+        //Preview bulding placement and place it if needed
+        if (item_placing != null)
         {
-            //Display placement accordingly to its validity
-            //if (building_manager)
-                //DisplayPlacemenet()
-
-
-        }
-        //Player is cancelling input on map
-        if (Input.GetMouseButtonUp(0))
-        {
-            //If placement is valid
-            //Place!
+            RaycastHit hit;
+            Ray ray = main_camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+                if (hit.transform.tag == "Terrain")
+                    if (item_manager.DisplayPlacement(item_placing, hit.point, hit.normal))
+                        //Place if player clicks
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                             Debug.Log("Player constructed a " + item_placing.GetComponent<Item>().item_name);
+                             item_manager.PlaceItem(item_placing,hit.point, hit.normal);
+                            item_manager.ClearDisplay();
+                        }
         }
     }
 }
