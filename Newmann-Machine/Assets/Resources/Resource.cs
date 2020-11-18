@@ -6,7 +6,7 @@ public class Resource : MonoBehaviour
 {
     public string resource_name;
     public bool is_instantiated;
-    public Collider collider;
+    public Collider coll;
 
 
 }

@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public TerrainGenerator terrain_gen;
     public ResourceManager resource_manager;
-    public Player player;
+    public PlayerInput player_input;
     private void Start()
     {
         StartCoroutine(GameRoutine());
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         {
             yield return terrain_gen.GenerateNewTerrain();
             yield return resource_manager.PopulateResources();
-            yield return player.SpawnRoutine(terrain_gen.transform.position);
+            yield return player_input.SpawnRoutine(terrain_gen.transform.position);
 
             //Game loop
             while (true)
