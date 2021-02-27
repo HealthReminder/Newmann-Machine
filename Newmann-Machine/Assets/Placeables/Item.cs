@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
     public string item_name;
-    public bool is_instantiated;
-    public Collider[] coll;
+    public Vector2 angle_range;
+    [HideInInspector] public bool is_instantiated;
+    public Collider[] colls;
     public Renderer[] renderers;
     public void ChangeColors(Color new_color)
     {

@@ -280,6 +280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe281d9cc38e7142aefdd9615392e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource_name: Crystal
+  item_name: Crystal
+  angle_range: {x: 15, y: 45}
   is_instantiated: 0
-  collider: {fileID: 1806168452569345832}
+  colls:
+  - {fileID: 1806168452569345832}
+  renderers:
+  - {fileID: 1806168452933794048}
+  - {fileID: 1806168452250295104}

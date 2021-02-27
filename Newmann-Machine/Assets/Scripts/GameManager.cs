@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public TerrainGenerator terrain_gen;
     public ResourceManager resource_manager;
     public PlayerInput player_input;
+    //Game loop
+    Dictionary<string, Item> player_inventory; //This is basically the player economy
     private void Start()
     {
         StartCoroutine(GameRoutine());

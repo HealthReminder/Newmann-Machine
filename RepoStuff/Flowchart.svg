@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg4698"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="Flowchart.svg">
+  <defs
+     id="defs4692">
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="DotS"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path5705"
+         d="M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z "
+         style="fill-rule:evenodd;stroke:#979797;stroke-width:1pt;stroke-opacity:1;fill:#979797;fill-opacity:1"
+         transform="scale(0.2) translate(7.4, 1)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Send"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path5653"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.2) rotate(180) translate(6,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotS-7"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5705-9"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#979797;fill-opacity:1;fill-rule:evenodd;stroke:#979797;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotS-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5705-4"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#979797;fill-opacity:1;fill-rule:evenodd;stroke:#979797;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotS-4-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5705-4-7"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#979797;fill-opacity:1;fill-rule:evenodd;stroke:#979797;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotS-4-5-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5705-4-7-1"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#979797;fill-opacity:1;fill-rule:evenodd;stroke:#979797;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotS-4-5-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5705-4-7-10"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#979797;fill-opacity:1;fill-rule:evenodd;stroke:#979797;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotS-4-5-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5705-4-7-0"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#979797;fill-opacity:1;fill-rule:evenodd;stroke:#979797;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotS-4-5-25"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5705-4-7-3"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#979797;fill-opacity:1;fill-rule:evenodd;stroke:#979797;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotS-4-5-25-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5705-4-7-3-9"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#979797;fill-opacity:1;fill-rule:evenodd;stroke:#979797;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,1.48,0.2)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.42778579"
+     inkscape:cx="983.51998"
+     inkscape:cy="408.62671"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4695">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#c6e8e6;stroke-width:7.49192381;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect823"
+       width="210.16031"
+       height="354.94025"
+       x="3.8042555"
+       y="-6.6902761"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <rect
+       style="opacity:1;fill:#f0fcff;fill-opacity:1;fill-rule:nonzero;stroke:#c6e8e6;stroke-width:3.11248183;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-3"
+       width="152.87421"
+       height="24.964508"
+       x="30.098644"
+       y="6.8135333"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#c6e8e6;stroke-width:7.87354803;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect823-2"
+       width="210.16031"
+       height="43.692028"
+       x="3.8042555"
+       y="304.55795"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <path
+       style="fill:none;stroke:#979797;stroke-width:2.16499996;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DotS-4-5-25)"
+       d="m 36.005173,202.46318 v 28.46631"
+       id="path5636-2-9-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#979797;stroke-width:2.16499996;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DotS-4-5)"
+       d="m 36.005173,132.26401 v 47.84655"
+       id="path5636-2-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:#f0fcff;fill-opacity:1;fill-rule:nonzero;stroke:#18d797;stroke-width:2.54200006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831"
+       width="41.795704"
+       height="11.657735"
+       x="85.246826"
+       y="42.308514"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,59.293688,-0.0071113)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835"><rect
+           id="rect837"
+           width="155.45161"
+           height="71.297363"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         id="flowPara839"
+         style="text-align:center;text-anchor:middle">Program start</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="105.39042"
+       y="15.543018"
+       id="text1064-8-6"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="106.46529"
+         y="15.543018"
+         style="font-size:8.46666622px;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332"
+         id="tspan8203">Tycoon Game On A Procedurally </tspan><tspan
+         sodipodi:role="line"
+         x="105.39042"
+         y="26.12635"
+         style="font-size:8.46666622px;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332"
+         id="tspan8207">Generated Terrain Mesh</tspan></text>
+    <rect
+       style="opacity:1;fill:#eee1fe;fill-opacity:1;fill-rule:nonzero;stroke:#b08cd2;stroke-width:2.54200006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-6"
+       width="41.795704"
+       height="11.657735"
+       x="46.168816"
+       y="65.048775"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833-7-9"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,20.215681,22.733144)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835-1-2"><rect
+           id="rect837-4-8"
+           width="155.45161"
+           height="71.297363"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         style="text-align:center;text-anchor:middle"
+         id="flowPara5385-7">GameManager</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="41.92165"
+       y="88.114243"
+       id="text1064-7"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         id="tspan1062-5"
+         x="41.92165"
+         y="88.114243"
+         style="stroke-width:0.26458332">Controls the game flow</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="42.008793"
+       y="95.317642"
+       id="text1064-8-4"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="42.008793"
+         y="95.317642"
+         style="writing-mode:lr-tb;stroke-width:0.26458332"
+         id="tspan1084-2">Calls almost all scripts </tspan></text>
+    <rect
+       style="opacity:1;fill:#f0fcff;fill-opacity:1;fill-rule:nonzero;stroke:#6b818c;stroke-width:2.67878485;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7"
+       width="46.414772"
+       height="11.657735"
+       x="130.27727"
+       y="65.048775"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833-7-3"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,106.63365,22.733156)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835-1-8"><rect
+           id="rect837-4-0"
+           width="155.45161"
+           height="71.297363"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         style="text-align:center;text-anchor:middle"
+         id="flowPara5385-8">CameraBehaviour</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="126.60129"
+       y="88.204811"
+       id="text1064"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         id="tspan1062"
+         x="126.60129"
+         y="88.204811"
+         style="stroke-width:0.26458332">Orbit focusing transform</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="126.68845"
+       y="95.408226"
+       id="text1064-8"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="126.68845"
+         y="95.408226"
+         style="writing-mode:lr-tb;stroke-width:0.26458332"
+         id="tspan1084">Orbit controlled by player</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="126.79016"
+       y="102.40569"
+       id="text1064-8-2"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="126.79016"
+         y="102.40569"
+         style="writing-mode:lr-tb;stroke-width:0.26458332"
+         id="tspan1084-1">Zoom in and out</tspan></text>
+    <rect
+       style="opacity:1;fill:#feffe3;fill-opacity:1;fill-rule:nonzero;stroke:#cdcd7a;stroke-width:2.63710666;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-9"
+       width="44.981709"
+       height="11.657735"
+       x="30.441746"
+       y="117.00236"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833-7-3-9"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,6.0816045,74.686725)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835-1-8-0"><rect
+           id="rect837-4-0-7"
+           width="155.45161"
+           height="71.297363"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         style="text-align:center;text-anchor:middle"
+         id="flowPara5563">TerrainController</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="84.651634"
+       y="121.50385"
+       id="text1064-0"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         id="tspan1062-4"
+         x="84.651634"
+         y="121.50385"
+         style="stroke-width:0.26458332">Handles all related to the Terrain object</tspan><tspan
+         sodipodi:role="line"
+         x="84.651634"
+         y="127.67747"
+         style="stroke-width:0.26458332"
+         id="tspan5626">and its procedural generation</tspan></text>
+    <rect
+       style="opacity:1;fill:#aaeeff;fill-opacity:1;fill-rule:nonzero;stroke:#2c9bb4;stroke-width:2.63710666;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-9-9"
+       width="44.981709"
+       height="11.657735"
+       x="18.653929"
+       y="150.83002"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833-7-3-9-4"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-5.7062134,108.51436)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835-1-8-0-1"><rect
+           id="rect837-4-0-7-4"
+           width="155.45161"
+           height="71.297363"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         style="text-align:center;text-anchor:middle"
+         id="flowPara5563-0">Terrain</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="76.195045"
+       y="145.46935"
+       id="text1064-0-8"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         id="tspan1062-4-7"
+         x="76.195045"
+         y="145.46935"
+         style="stroke-width:0.26458332">Handles functions to alter terrain mesh/appearance</tspan><tspan
+         sodipodi:role="line"
+         x="76.195045"
+         y="151.64296"
+         style="stroke-width:0.26458332"
+         id="tspan5628">Apply deformations: Perlin; Voronoi</tspan><tspan
+         sodipodi:role="line"
+         x="76.195045"
+         y="157.81656"
+         style="stroke-width:0.26458332"
+         id="tspan5630">Apply filters: Square Padding; Arch; Pixelate; </tspan><tspan
+         sodipodi:role="line"
+         x="76.195045"
+         y="163.99017"
+         style="stroke-width:0.26458332"
+         id="tspan5632">Clamp Height To Range; Custom Curves</tspan><tspan
+         sodipodi:role="line"
+         x="76.195045"
+         y="170.16379"
+         style="stroke-width:0.26458332"
+         id="tspan5634">Terrain Color: Height Color; Normal Color, Smooth Color</tspan></text>
+    <path
+       style="fill:none;stroke:#979797;stroke-width:2.16499996;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DotS)"
+       d="M 83.969653,47.933762 H 66.654462 v 11.589562"
+       id="path5636"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#979797;stroke-width:2.16499996;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DotS-4)"
+       d="m 44.467954,71.079098 h -11.43949 l 0,37.350332"
+       id="path5636-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 76.316167,123.39455 h 6.163054"
+       id="path7130"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 65.561106,76.798332 v 6.341457"
+       id="path7132"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 153.63245,77.454343 v 4.810762"
+       id="path7134"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="opacity:1;fill:#eee1fe;fill-opacity:1;fill-rule:nonzero;stroke:#b08cd2;stroke-width:2.82183766;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-9-0"
+       width="51.504429"
+       height="11.657735"
+       x="21.279638"
+       y="185.37288"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833-7-3-9-2"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-5.0620892,143.05723)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835-1-8-0-0"><rect
+           id="rect837-4-0-7-9"
+           width="197.21051"
+           height="32.884918"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         style="text-align:center;text-anchor:middle"
+         id="flowPara5563-7">ResourceManager</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="82.012245"
+       y="189.87437"
+       id="text1064-0-88"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="82.012245"
+         y="189.87437"
+         style="stroke-width:0.26458332"
+         id="tspan5626-2">Populate map with specific objects (Resources)</tspan><tspan
+         sodipodi:role="line"
+         x="82.012245"
+         y="196.04799"
+         style="stroke-width:0.26458332"
+         id="tspan10439">and handles all of its interactions</tspan></text>
+    <rect
+       style="opacity:1;fill:#aaeeff;fill-opacity:1;fill-rule:nonzero;stroke:#2c9bb4;stroke-width:2.63710666;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-9-9-4"
+       width="44.981709"
+       height="11.657735"
+       x="16.014538"
+       y="210.89104"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833-7-3-9-4-2"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-8.3456023,168.57537)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835-1-8-0-1-9"><rect
+           id="rect837-4-0-7-4-7"
+           width="155.45161"
+           height="71.297363"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         style="text-align:center;text-anchor:middle"
+         id="flowPara5563-0-0">Resource</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="73.555656"
+       y="217.33859"
+       id="text1064-0-8-4"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="73.555656"
+         y="217.33859"
+         style="stroke-width:0.26458332"
+         id="tspan5634-5">Contain information relevant to the game mechanics</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 73.676779,191.76506 h 6.163054"
+       id="path7130-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:#f0fcff;fill-opacity:1;fill-rule:nonzero;stroke:#6b818c;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-8"
+       width="4.6247673"
+       height="5.0340261"
+       x="23.830015"
+       y="314.16101"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"
+       ry="2.5170131" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="35.129288"
+       y="318.68695"
+       id="text1064-0-0"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="35.129288"
+         y="318.68695"
+         style="stroke-width:0.26458332"
+         id="tspan5626-3">Standalone Script</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.20356916px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 28.98646,316.99046 h 3.648338"
+       id="path7130-4-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:#f0fcff;fill-opacity:1;fill-rule:nonzero;stroke:#18d797;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-8-9"
+       width="4.6247673"
+       height="5.0340261"
+       x="99.453201"
+       y="314.63745"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"
+       ry="2.5170131" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="110.75247"
+       y="319.16339"
+       id="text1064-0-0-1"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="110.75247"
+         y="319.16339"
+         style="stroke-width:0.26458332"
+         id="tspan5626-3-4">Action</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.20356916px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 104.60965,317.4669 h 3.64833"
+       id="path7130-4-0-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:#eee1fe;fill-opacity:1;fill-rule:nonzero;stroke:#b08cd2;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-8-9-3"
+       width="4.6247673"
+       height="5.0340261"
+       x="157.44922"
+       y="314.51422"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"
+       ry="2.5170131" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="168.74849"
+       y="319.04016"
+       id="text1064-0-0-1-0"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="168.74849"
+         y="319.04016"
+         style="stroke-width:0.26458332"
+         id="tspan5626-3-4-9">Manager</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.20356916px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 162.60567,317.34367 H 166.254"
+       id="path7130-4-0-4-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:#feffe3;fill-opacity:1;fill-rule:nonzero;stroke:#cdcd7a;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-8-9-3-2"
+       width="4.6247673"
+       height="5.0340261"
+       x="23.830015"
+       y="328.37463"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"
+       ry="2.5170131" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="35.12928"
+       y="332.90057"
+       id="text1064-0-0-1-0-6"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="35.12928"
+         y="332.90057"
+         style="stroke-width:0.26458332"
+         id="tspan5626-3-4-9-2">Controller</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.20356916px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 28.986465,331.20406 h 3.64833"
+       id="path7130-4-0-4-9-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:#aaeeff;fill-opacity:1;fill-rule:nonzero;stroke:#2c9bb4;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-8-9-3-2-5"
+       width="4.6247673"
+       height="5.0340261"
+       x="99.453201"
+       y="328.55359"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"
+       ry="2.5170131" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="110.75247"
+       y="333.07953"
+       id="text1064-0-0-1-0-6-8"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="110.75247"
+         y="333.07953"
+         style="stroke-width:0.26458332"
+         id="tspan5626-3-4-9-2-8">Object</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.20356916px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 104.60965,331.38302 h 3.64833"
+       id="path7130-4-0-4-9-4-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#979797;stroke-width:1.50482333;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DotS-4-5-25-5)"
+       d="m 36.005173,255.68105 v 23.11564"
+       id="path5636-2-9-7-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:#eee1fe;fill-opacity:1;fill-rule:nonzero;stroke:#b08cd2;stroke-width:2.46840549;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-9-0-1"
+       width="38.250973"
+       height="12.011168"
+       x="20.73675"
+       y="238.93053"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833-7-3-9-2-8"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-6.4537038,196.2751)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835-1-8-0-0-4"><rect
+           id="rect837-4-0-7-9-0"
+           width="155.45161"
+           height="71.297363"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         style="text-align:center;text-anchor:middle"
+         id="flowPara5563-7-4">ItemManager</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="68.096115"
+       y="246.18469"
+       id="text1064-0-88-5"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="68.096115"
+         y="246.18469"
+         style="stroke-width:0.26458332"
+         id="tspan5626-2-2">Handles placement and tracking of player buildings</tspan></text>
+    <rect
+       style="opacity:1;fill:#aaeeff;fill-opacity:1;fill-rule:nonzero;stroke:#2c9bb4;stroke-width:2.63710666;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect831-52-7-9-9-4-8"
+       width="44.981709"
+       height="11.657735"
+       x="16.014538"
+       y="272.4184"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot833-7-3-9-4-2-9"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.66666603px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-8.3456033,230.10274)"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><flowRegion
+         id="flowRegion835-1-8-0-1-9-7"><rect
+           id="rect837-4-0-7-4-7-9"
+           width="155.45161"
+           height="71.297363"
+           x="99.348785"
+           y="171.10893" /></flowRegion><flowPara
+         style="text-align:center;text-anchor:middle"
+         id="flowPara5563-0-0-5">Item</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888855px;line-height:1.25;font-family:Jura;-inkscape-font-specification:Jura;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="72.16404"
+       y="276.87631"
+       id="text1064-0-8-4-8"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901"><tspan
+         sodipodi:role="line"
+         x="72.16404"
+         y="276.87631"
+         style="stroke-width:0.26458332"
+         id="tspan10732">Items can be buildings, owned by the player or not, </tspan><tspan
+         sodipodi:role="line"
+         x="72.16404"
+         y="283.04993"
+         style="stroke-width:0.26458332"
+         id="tspan10736">that are relevant to the game mechanics</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 59.451396,244.98294 h 6.163053"
+       id="path7130-4-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 64.487803,156.63255 h 6.163054"
+       id="path7130-4-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 61.863752,216.11105 h 6.163054"
+       id="path7130-4-2-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 61.741724,278.51697 h 6.163053"
+       id="path7130-4-5-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

@@ -7,4 +7,5 @@ public static class GlobalConstants
 {
     //If 0 skip
     public static float INTRO_SPEED = 1;
+    public static float GENERATION_SPEED = 1;
 }

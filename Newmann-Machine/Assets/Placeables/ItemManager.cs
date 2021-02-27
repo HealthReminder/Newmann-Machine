@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ItemManager : MonoBehaviour
 {
+
     public List<Item> buildings;
     #region Item Placement
     public void PlaceItem(GameObject item, Vector3 pos, Vector3 up_vector)
@@ -45,8 +47,8 @@ public class ItemManager : MonoBehaviour
                 Destroy(item_display.gameObject);
                 item_display = Instantiate(displaying_item, pos, Quaternion.identity, transform).GetComponent<Item>();
                 item_display.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-                for (int c = 0; c < item_display.coll.Length; c++)
-                    item_display.coll[c].enabled = false;
+                for (int c = 0; c < item_display.colls.Length; c++)
+                    item_display.colls[c].enabled = false;
             }
         }
         else
@@ -54,8 +56,8 @@ public class ItemManager : MonoBehaviour
             //Was not previewing any item
             item_display = Instantiate(displaying_item, pos, Quaternion.identity, transform).GetComponent<Item>();
             item_display.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-            for (int c = 0; c < item_display.coll.Length; c++)
-                item_display.coll[c].enabled = false;
+            for (int c = 0; c < item_display.colls.Length; c++)
+                item_display.colls[c].enabled = false;
         }
 
         //Move item and align to normal
@@ -63,7 +65,7 @@ public class ItemManager : MonoBehaviour
         item_display.transform.rotation  = Quaternion.FromToRotation(Vector3.up, normal);
 
         //Change colors according to validity
-        if (IsColliderIntersecting(item_display.coll))
+        if (IsColliderIntersecting(item_display.colls))
         {
             item_display.ChangeColors(Color.red);
             return false;
@@ -92,18 +94,15 @@ public class ItemManager : MonoBehaviour
                 BoxCollider b_coll = cur.GetComponent<BoxCollider>();
                 if ((Physics.OverlapBox(b_coll.transform.position, b_coll.size ,b_coll.transform.rotation).Length > 0))
                     is_intersecting = true;
-
             }
             else if (cur.GetComponent<CapsuleCollider>())
             {
                 CapsuleCollider c_coll = cur.GetComponent<CapsuleCollider>();
                 Vector3 top = new Vector3(c_coll.center.x, c_coll.center.y + c_coll.height / 2 - c_coll.radius, c_coll.center.z);
                 Vector3 bottom = new Vector3(c_coll.center.x, c_coll.center.y - c_coll.height / 2 + c_coll.radius, c_coll.center.z);
-                if ((Physics.OverlapCapsule(top,bottom,c_coll.radius ).Length > 0))
+                if ((Physics.OverlapCapsule(top,bottom,c_coll.radius).Length > 0))
                     is_intersecting = true;
-
             }
-
         }
         return is_intersecting;
     }

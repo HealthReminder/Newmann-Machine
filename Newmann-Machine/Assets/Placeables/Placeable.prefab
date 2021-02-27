@@ -156,8 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item_name: TestBuilding
+  angle_range: {x: 0, y: 0}
   is_instantiated: 0
-  coll:
+  colls:
   - {fileID: 2745465426633647524}
   renderers:
   - {fileID: 20280047154199731}
