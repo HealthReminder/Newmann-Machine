@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
             yield return terrain_gen.GenerateNewTerrain();
             yield return resource_manager.PopulateResources();
             yield return player_input.SpawnRoutine(terrain_gen.transform.position);
-
             //Game loop
             while (true)
             {

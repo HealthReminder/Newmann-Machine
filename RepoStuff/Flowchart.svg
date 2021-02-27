@@ -15,7 +15,10 @@
    version="1.1"
    id="svg4698"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="Flowchart.svg">
+   sodipodi:docname="Flowchart.svg"
+   inkscape:export-filename="B:\Projetos\2020\4\Newmann-Machine\RepoStuff\flowchart.png"
+   inkscape:export-xdpi="234.27901"
+   inkscape:export-ydpi="234.27901">
   <defs
      id="defs4692">
     <marker
@@ -236,13 +239,19 @@
        d="m 36.005173,202.46318 v 28.46631"
        id="path5636-2-9-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#979797;stroke-width:2.16499996;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DotS-4-5)"
        d="m 36.005173,132.26401 v 47.84655"
        id="path5636-2-9"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <rect
        style="opacity:1;fill:#f0fcff;fill-opacity:1;fill-rule:nonzero;stroke:#18d797;stroke-width:2.54200006;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect831"
@@ -515,29 +524,44 @@
        d="M 83.969653,47.933762 H 66.654462 v 11.589562"
        id="path5636"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#979797;stroke-width:2.16499996;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DotS-4)"
        d="m 44.467954,71.079098 h -11.43949 l 0,37.350332"
        id="path5636-2"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 76.316167,123.39455 h 6.163054"
        id="path7130"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 65.561106,76.798332 v 6.341457"
        id="path7132"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 153.63245,77.454343 v 4.810762"
        id="path7134"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <rect
        style="opacity:1;fill:#eee1fe;fill-opacity:1;fill-rule:nonzero;stroke:#b08cd2;stroke-width:2.82183766;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect831-52-7-9-0"
@@ -626,7 +650,10 @@
        d="m 73.676779,191.76506 h 6.163054"
        id="path7130-4"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <rect
        style="opacity:1;fill:#f0fcff;fill-opacity:1;fill-rule:nonzero;stroke:#6b818c;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect831-52-7-8"
@@ -657,7 +684,10 @@
        d="m 28.98646,316.99046 h 3.648338"
        id="path7130-4-0"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <rect
        style="opacity:1;fill:#f0fcff;fill-opacity:1;fill-rule:nonzero;stroke:#18d797;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect831-52-7-8-9"
@@ -688,7 +718,10 @@
        d="m 104.60965,317.4669 h 3.64833"
        id="path7130-4-0-4"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <rect
        style="opacity:1;fill:#eee1fe;fill-opacity:1;fill-rule:nonzero;stroke:#b08cd2;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect831-52-7-8-9-3"
@@ -719,7 +752,10 @@
        d="M 162.60567,317.34367 H 166.254"
        id="path7130-4-0-4-9"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <rect
        style="opacity:1;fill:#feffe3;fill-opacity:1;fill-rule:nonzero;stroke:#cdcd7a;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect831-52-7-8-9-3-2"
@@ -750,7 +786,10 @@
        d="m 28.986465,331.20406 h 3.64833"
        id="path7130-4-0-4-9-4"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <rect
        style="opacity:1;fill:#aaeeff;fill-opacity:1;fill-rule:nonzero;stroke:#2c9bb4;stroke-width:1.65600002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect831-52-7-8-9-3-2-5"
@@ -781,13 +820,19 @@
        d="m 104.60965,331.38302 h 3.64833"
        id="path7130-4-0-4-9-4-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#979797;stroke-width:1.50482333;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#DotS-4-5-25-5)"
        d="m 36.005173,255.68105 v 23.11564"
        id="path5636-2-9-7-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <rect
        style="opacity:1;fill:#eee1fe;fill-opacity:1;fill-rule:nonzero;stroke:#b08cd2;stroke-width:2.46840549;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect831-52-7-9-0-1"
@@ -876,24 +921,36 @@
        d="m 59.451396,244.98294 h 6.163053"
        id="path7130-4-5"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 64.487803,156.63255 h 6.163054"
        id="path7130-4-2"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 61.863752,216.11105 h 6.163054"
        id="path7130-4-2-1"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 61.741724,278.51697 h 6.163053"
        id="path7130-4-5-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\V\path2673-2.png"
+       inkscape:export-xdpi="234.27901"
+       inkscape:export-ydpi="234.27901" />
   </g>
 </svg>
