@@ -14,12 +14,11 @@
      </h2> 
    <img src = "https://media3.giphy.com/media/i6XtTJylwk3Jc3kAJu/giphy.gif" alt = "A GIF example of what the terrain generator can create." id="portrait_image" width = "410px" height = "340px">
 
-      <h2>Follow the flowchart below to understand where to change and add features:
-  </h2>
+      <h2>Follow the flowchart below to understand where to change and add features:</h2>
   <br><p> </p>
    <img src = "https://i.imgur.com/doidKWe.png" alt = "A flowchart of how the program works." id="portrait_image" width = "600px" height = "990px">
  
-      <h3>Created in Unity.<br><br></h2>
+      <h3>Created in Unity. By Eduardo Francio.<br><br></h3>
 
  <br><p> </p>
  <br><p> </p>
